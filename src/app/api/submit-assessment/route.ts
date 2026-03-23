@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import path from 'path';
 import { generatePDFBuffer } from '@/lib/pdfGenerator';
 
 interface SubmitBody {
@@ -37,8 +38,9 @@ async function sendEmail(params: {
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e;">
         <div style="background:#021940;padding:30px;border-radius:8px 8px 0 0;text-align:center;">
+          <img src="cid:logo" alt="Maple Learning Solutions" style="width:140px; margin-bottom:16px;" />
           <h1 style="color:#d7b55b;margin:0;font-size:22px;">Crisis Readiness Assessment</h1>
-          <p style="color:#cbd5e1;margin:8px 0 0;font-size:14px;">Maple Learning Solutions</p>
+          <p style="color:#cbd5e1;margin:8px 0 0;font-size:20px;">Maple Learning Solutions</p>
         </div>
         <div style="background:#f8fafc;padding:30px;">
           <p style="font-size:16px;margin-top:0;">Hi <strong>${params.name}</strong>,</p>
@@ -56,11 +58,16 @@ async function sendEmail(params: {
           </a>
         </div>
         <div style="background:#021940;padding:16px;border-radius:0 0 8px 8px;text-align:center;">
-          <p style="color:#94a3b8;font-size:11px;margin:0;">© Maple Learning Solutions | www.maplelearning.com</p>
+          <p style="color:#94a3b8;font-size:11px;margin:0;">© Maple Learning Solutions | www.maplelearningsolutions.com</p>
         </div>
       </div>
     `,
     attachments: [
+      {
+        filename: 'logo.png',
+        path: path.join(process.cwd(), 'public', 'logo.png'),
+        cid: 'logo' // same cid value as in the html img src
+      },
       {
         filename: `Assessment_Report_${params.name.replace(/\s+/g, '_')}.pdf`,
         content: params.pdfBuffer,

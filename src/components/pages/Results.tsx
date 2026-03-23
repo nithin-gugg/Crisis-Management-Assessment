@@ -259,15 +259,20 @@ export const Results: React.FC = () => {
               </div>
             </div>
             <div className="hidden md:block w-px h-8 bg-brand-gold/10" />
-            <div className="flex items-center gap-3 text-left">
-              <div className="p-3 rounded-full bg-brand-gold/10 text-brand-gold">
+            <a 
+              href="https://www.maplelearningsolutions.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-left cursor-pointer group"
+            >
+              <div className="p-3 rounded-full bg-brand-gold/10 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
                 <MessageSquare size={24} />
               </div>
               <div>
-                <p className="font-bold text-sm">Talk to an Expert</p>
+                <p className="font-bold text-sm group-hover:text-brand-gold transition-colors">Talk to an Expert</p>
                 <p className="text-xs text-brand-text-muted">24/7 strategic response support</p>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

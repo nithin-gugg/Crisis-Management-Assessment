@@ -47,20 +47,20 @@ export async function generatePDFBuffer(data: ReportData): Promise<Buffer> {
   if (logoImg) {
     const logoWidth  = 80;
     const logoHeight = (logoImg.height / logoImg.width) * logoWidth;
-    page.drawImage(logoImg, { x: 30, y: height - 60, width: logoWidth, height: logoHeight });
+    page.drawImage(logoImg, { x: 30, y: height - 40 - (logoHeight / 2), width: logoWidth, height: logoHeight });
   }
 
   page.drawText('Crisis Readiness Assessment Report', {
-    x: logoImg ? 120 : 30,
-    y: height - 45,
+    x: logoImg ? 125 : 30,
+    y: height - 44, // Baseline aligned
     size: 16,
     font: fontBold,
     color: rgb(1, 1, 1),
   });
 
   page.drawText(`Generated: ${new Date().toLocaleDateString('en-GB')}`, {
-    x: width - 160,
-    y: height - 60,
+    x: width - 150,
+    y: height - 44, // Same baseline as title
     size: 9,
     font: fontReg,
     color: rgb(goldR, goldG, goldB),
