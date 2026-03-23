@@ -236,7 +236,7 @@ export const Results: React.FC = () => {
             </button>
             <button
               className="btn-primary flex items-center justify-center gap-2"
-              onClick={() => window.open('https://www.maplelearningsolutions.com/ar/elearning-solutions-in-uae#cta-ae', '_blank')}
+              onClick={() => window.open('https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae', '_blank')}
             >
               <MessageSquare size={20} /> Book Consultation
             </button>
@@ -260,7 +260,7 @@ export const Results: React.FC = () => {
             </div>
             <div className="hidden md:block w-px h-8 bg-brand-gold/10" />
             <a 
-              href="https://www.maplelearningsolutions.com/ar/elearning-solutions-in-uae#cta-ae"
+              href="https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-left cursor-pointer group"
