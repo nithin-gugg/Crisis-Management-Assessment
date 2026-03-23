@@ -52,7 +52,7 @@ async function sendEmail(params: {
             <li>Recommended training modules</li>
           </ul>
           <p>Our team of GCC crisis management experts is available to help you build a customized training roadmap.</p>
-          <a href="https://www.maplelearningsolutions.com/contact" 
+          <a href="https://www.maplelearningsolutions.com/ar/elearning-solutions-in-uae#cta-ae" 
              style="display:inline-block;background:#d7b55b;color:#021940;font-weight:bold;padding:12px 24px;border-radius:8px;text-decoration:none;margin-top:10px;">
             Book a Consultation
           </a>
