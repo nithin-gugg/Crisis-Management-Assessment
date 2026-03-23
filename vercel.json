@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/app/api/submit-assessment/route": {
+      "maxDuration": 30
+    },
+    "src/app/api/generate-pdf/route": {
+      "maxDuration": 20
+    }
+  }
+}

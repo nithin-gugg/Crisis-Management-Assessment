@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
+/* =====================================================
+   Brand Design Tokens — used for runtime theme toggle
+   ===================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-navy: #021940;
+  --brand-navy-light: #031129;
+  --brand-gold: #d7b55b;
+  --brand-gold-dark: #c9a94f;
+  --brand-text-primary: #ffffff;
+  --brand-text-secondary: #cbd5e1;
+  --brand-text-muted: #94a3b8;
+
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Light theme overrides (toggled by adding .light to <html>) */
+html.light {
+  --brand-navy: #ffffff;
+  --brand-navy-light: #f8fafc;
+  --brand-text-primary: #041e49;
+  --brand-text-secondary: #1e293b;
+  --brand-text-muted: #64748b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =====================================================
+   Tailwind v4 theme — registers custom color utilities
+   text-brand-gold, bg-brand-navy, etc.
+   ===================================================== */
+@theme {
+  --color-brand-navy: #021940;
+  --color-brand-navy-light: #031129;
+  --color-brand-gold: #d7b55b;
+  --color-brand-gold-dark: #c9a94f;
+  --color-brand-text-primary: #ffffff;
+  --color-brand-text-secondary: #cbd5e1;
+  --color-brand-text-muted: #94a3b8;
+}
+
+/* =====================================================
+   Base styles
+   ===================================================== */
+@layer base {
+  body {
+    background-color: var(--brand-navy);
+    color: var(--brand-text-primary);
+    font-family: var(--font-inter, system-ui, sans-serif);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  input, textarea, select {
+    color: var(--brand-text-primary);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =====================================================
+   Component classes
+   ===================================================== */
+@layer components {
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--brand-gold);
+    color: #021940;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    transition: all 0.2s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover { background-color: var(--brand-gold-dark); }
+  .btn-primary:active { transform: scale(0.95); }
+  .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--brand-gold);
+    color: var(--brand-gold);
+    font-weight: 700;
+    border-radius: 0.75rem;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-secondary:hover { background-color: var(--brand-gold); color: #021940; }
+  .btn-secondary:active { transform: scale(0.95); }
+
+  .card-premium {
+    background-color: var(--brand-navy-light);
+    padding: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 181, 91, 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s;
+  }
+  .card-premium:hover { border-color: rgba(215, 181, 91, 0.3); }
 }
