@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
             </button>
           ) : isComplete ? (
             <Link 
-              href="https://www.maplelearningsolutions.com/contact" 
+              href="https://www.maplelearningsolutions.com/ar/elearning-solutions-in-uae#cta-ae" 
               target="_blank"
               className="btn-primary flex items-center gap-2 text-sm py-2 px-4 shadow-none"
             >
