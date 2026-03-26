@@ -6,14 +6,22 @@ import { AssessmentProvider } from '@/context/AssessmentContext';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Crisis Readiness Assessment | Maple Learning Solutions',
+  title: 'Crisis Management Training in GCC | BCP & Readiness',
   description:
-    'Assess your organization\'s crisis management readiness with our expert-designed 15-question assessment. Get a personalized report and training recommendations.',
-  keywords: 'crisis management, business continuity, GCC, readiness assessment, eLearning',
+    "Crisis Management Training in GCC | BCP & Readiness helps organizations prepare for disruptions, build resilience, and ensure business continuity.",
+  keywords:
+    'crisis management, business continuity, GCC, readiness assessment, eLearning',
+
+  alternates: {
+    canonical: "https://gccbcp.maplelearningsolutions.com/",
+  },
+
   openGraph: {
     title: 'Crisis Readiness Assessment | Maple Learning Solutions',
-    description: 'Assess your organization\'s crisis management readiness and get a personalized report.',
+    description:
+      'Assess your organization\'s crisis management readiness and get a personalized report.',
     type: 'website',
+    url: "https://gccbcp.maplelearningsolutions.com/", 
   },
 };
 
