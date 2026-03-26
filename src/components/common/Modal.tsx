@@ -1,22 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2 } from 'lucide-react';
+import 'plyr/dist/plyr.css';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  iframeSrc: string;
+  videoSrc: string;
 }
 
-export const IframeModal: React.FC<ModalProps> = ({ isOpen, onClose, title, iframeSrc }) => {
+export const IframeModal: React.FC<ModalProps> = ({ isOpen, onClose, title, videoSrc }) => {
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) setLoading(true);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+
+    let isCancelled = false;
+    let player: any = null;
+
+    // Fully isolate Plyr DOM changes from React by creating the video node manually
+    if (containerRef.current) {
+      containerRef.current.innerHTML = '';
+    }
+
+    const videoEl = document.createElement('video');
+    videoEl.className = 'plyr-react plyr';
+    videoEl.controls = true;
+    videoEl.playsInline = true;
+    containerRef.current.appendChild(videoEl);
+
+    import('plyr').then((module) => {
+      if (isCancelled) return;
+      // @ts-ignore
+      const Plyr = module.default || module;
+      
+      player = new Plyr(videoEl, {
+        autoplay: true,
+        controls: [
+          'play-large',
+          'rewind',
+          'play',
+          'fast-forward',
+          'progress',
+          'current-time',
+          'mute',
+          'volume',
+          'fullscreen'
+        ],
+        seekTime: 10,
+        disableContextMenu: true,
+        tooltips: { controls: true, seek: true }
+      });
+
+      player.source = {
+        type: 'video',
+        sources: [
+          {
+            src: videoSrc,
+            type: 'video/mp4',
+          },
+        ],
+      };
+      
+      player.on('ready', () => {
+        if (!isCancelled) setLoading(false);
+      });
+    }).catch(err => {
+      console.error('Failed to load plyr', err);
+      if (!isCancelled) setLoading(false);
+    });
+
+    return () => {
+      isCancelled = true;
+      if (player) {
+        try {
+          player.destroy();
+        } catch (e) {
+          console.error("Plyr cleanup err", e);
+        }
+      }
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
+      }
+    };
+  }, [isOpen, videoSrc]);
 
   return (
     <AnimatePresence>
@@ -44,22 +119,30 @@ export const IframeModal: React.FC<ModalProps> = ({ isOpen, onClose, title, ifra
                 <X size={24} />
               </button>
             </div>
-            <div className="flex-grow relative bg-black">
+            <div className="flex-grow relative bg-black flex flex-col justify-center overflow-hidden">
+              <style>{`
+                .plyr {
+                  height: 100%;
+                  width: 100%;
+                }
+                .plyr__video-wrapper {
+                  height: 100%;
+                }
+                .plyr__video-wrapper video {
+                  object-fit: contain;
+                }
+              `}</style>
               {loading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-brand-gold">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 text-brand-gold bg-black/50 backdrop-blur-sm">
                   <Loader2 className="animate-spin" size={48} />
                   <span className="font-medium animate-pulse tracking-widest text-xs uppercase">
                     Initializing Module...
                   </span>
                 </div>
               )}
-              <iframe
-                src={iframeSrc}
-                title={title}
-                onLoad={() => setLoading(false)}
-                className="w-full h-full border-none"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+              <div
+                ref={containerRef}
+                className="w-full h-full"
               />
             </div>
           </motion.div>

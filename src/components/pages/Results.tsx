@@ -281,7 +281,7 @@ export const Results: React.FC = () => {
         isOpen={!!activeModule}
         onClose={() => setActiveModule(null)}
         title={activeModule?.title || ''}
-        iframeSrc={activeModule?.src || ''}
+        videoSrc={activeModule?.src || ''}
       />
 
       <Footer />

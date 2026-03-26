@@ -5,25 +5,25 @@ export const TRAINING_MODULE_LIBRARY: Record<string, TrainingModule> = {
     id: 'bcp',
     title: 'Business Continuity & Crisis Response',
     description: 'Master the fundamentals of maintaining operations during disruption.',
-    src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    src: '/videos/bccr.mp4',
   },
   REMOTE: {
     id: 'remote',
     title: 'Remote Work & Digital Operations',
     description: 'Strategies for managing distributed teams and secure digital workflows.',
-    src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    src: '/videos/bccr.mp4'
   },
   SAFETY: {
     id: 'safety',
     title: 'Safety & Security Awareness',
     description: 'Essential protocols for physical security and personnel safety.',
-    src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    src: '/videos/bccr.mp4',
   },
   RESILIENCE: {
     id: 'resilience',
     title: 'Mental Health & Workforce Resilience',
     description: 'Techniques to support employee wellbeing during high-stress periods.',
-    src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    src: '/videos/bccr.mp4',
   },
 };
 
