@@ -51,7 +51,7 @@ export default function Footer() {
           <Link href="https://www.instagram.com/maple_learning_solutions" target="_blank" className="hover:text-[#d7b55b] transition">
             <Instagram size={20} />
           </Link>
-          <Link href="https://www.youtube.com/@MapleLearningSolutions" target="_blank" className="hover:text-[#d7b55b] transition">
+          <Link href="https://www.youtube.com/channel/UCObkCM6XEdSA96dUwUbnV-g" target="_blank" className="hover:text-[#d7b55b] transition">
             <Youtube size={20} />
           </Link>
         </div>
