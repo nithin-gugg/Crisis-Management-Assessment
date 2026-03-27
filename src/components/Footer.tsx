@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Globe, Facebook, Instagram } from "lucide-react";
+import { Linkedin, Globe, Facebook, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -50,6 +50,9 @@ export default function Footer() {
           </Link>
           <Link href="https://www.instagram.com/maple_learning_solutions" target="_blank" className="hover:text-[#d7b55b] transition">
             <Instagram size={20} />
+          </Link>
+          <Link href="https://www.youtube.com/@MapleLearningSolutions" target="_blank" className="hover:text-[#d7b55b] transition">
+            <Youtube size={20} />
           </Link>
         </div>
       </div>

@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
 import { motion } from 'framer-motion';
-import { User, Mail, Phone, ArrowRight, ShieldCheck, Loader2 } from 'lucide-react';
+import { User, Mail, Phone, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
 
 export const UserForm: React.FC = () => {
-  const { setUserData, nextStep } = useAssessment();
+  const { setUserData, nextStep, prevStep } = useAssessment();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +24,15 @@ export const UserForm: React.FC = () => {
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-8">
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md">
         <div className="card-premium !rounded-2xl">
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 relative">
+            <button 
+              type="button" 
+              onClick={prevStep}
+              className="absolute left-0 top-0 p-2 text-brand-text-muted hover:text-brand-gold transition-colors"
+              title="Back to Home"
+            >
+              <ArrowLeft size={20} />
+            </button>
             <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-brand-gold/10 text-brand-gold mb-3">
               <ShieldCheck size={28} />
             </div>
