@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
 import { motion } from 'framer-motion';
 import { User, Mail, Phone, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
+import { ConsentCheckbox } from '@/components/common/ConsentCheckbox';
 
 export const UserForm: React.FC = () => {
   const { setUserData, nextStep, prevStep } = useAssessment();
@@ -86,25 +87,11 @@ export const UserForm: React.FC = () => {
             </div>
 
             <div className="space-y-3 pt-2">
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <div className="relative flex items-center justify-center mt-0.5 shrink-0">
-                  <input
-                    type="checkbox"
-                    required
-                    className="peer appearance-none w-5 h-5 border-2 border-brand-gold/30 rounded bg-brand-navy checked:bg-brand-gold checked:border-brand-gold transition-all cursor-pointer"
-                    checked={consentPrivacy}
-                    onChange={(e) => setConsentPrivacy(e.target.checked)}
-                  />
-                  <div className="absolute text-brand-navy opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                </div>
-                <span className="text-sm text-brand-text-secondary group-hover:text-brand-text-primary transition-colors leading-tight">
-                  I consent to privacy policy of the details
-                </span>
-              </label>
+              <ConsentCheckbox 
+                checked={consentPrivacy} 
+                onChange={setConsentPrivacy} 
+                label="I consent to the privacy policy" 
+              />
 
               <label className="flex items-start gap-3 cursor-pointer group">
                 <div className="relative flex items-center justify-center mt-0.5 shrink-0">
