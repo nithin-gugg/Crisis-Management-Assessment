@@ -6,14 +6,17 @@ import { AssessmentProvider } from '@/context/AssessmentContext';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Crisis Management Training in GCC | BCP & Readiness',
+  metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
+  title: 'Crisis Readiness Assessment | Maple Learning Solutions',
   description:
-    "Crisis Management Training in GCC | BCP & Readiness helps organizations prepare for disruptions, build resilience, and ensure business continuity.",
+    "Assess your organization's crisis management readiness and get a personalized report.",
   keywords:
     'crisis management, business continuity, GCC, readiness assessment, eLearning',
+  applicationName: 'Maple Learning Solutions',
+  authors: [{ name: 'Maple Learning Solutions' }],
 
   alternates: {
-    canonical: "https://gccbcp.maplelearningsolutions.com/",
+    canonical: 'https://gccbcp.maplelearningsolutions.com/',
   },
 
   openGraph: {
@@ -21,13 +24,17 @@ export const metadata: Metadata = {
     description:
       "Assess your organization's crisis management readiness and get a personalized report.",
     type: 'website',
-    url: "https://gccbcp.maplelearningsolutions.com/",
+    url: 'https://gccbcp.maplelearningsolutions.com/',
+    siteName: 'Maple Learning Solutions',
+    locale: 'en_US',
     images: [
       {
-        url: "https://gccbcp.maplelearningsolutions.com/og-image.webp", // ✅ IMPORTANT
+        url: 'https://gccbcp.maplelearningsolutions.com/og-image.webp', // ✅ IMPORTANT
+        secureUrl: 'https://gccbcp.maplelearningsolutions.com/og-image.webp',
         width: 1200,
         height: 630,
-        alt: "Crisis Readiness Assessment",
+        alt: 'Crisis Readiness Assessment Thumbnail',
+        type: 'image/webp',
       },
     ],
   },
@@ -37,7 +44,16 @@ export const metadata: Metadata = {
     title: 'Crisis Readiness Assessment | Maple Learning Solutions',
     description:
       "Assess your organization's crisis management readiness and get a personalized report.",
-    images: ["https://gccbcp.maplelearningsolutions.com/og-image.webp"], // ✅ IMPORTANT
+    images: ['https://gccbcp.maplelearningsolutions.com/og-image.webp'], // ✅ IMPORTANT
+  },
+  
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
