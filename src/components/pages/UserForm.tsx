@@ -12,7 +12,6 @@ export const UserForm: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', company_website: '' });
   const [loading, setLoading] = useState(false);
   const [consentPrivacy, setConsentPrivacy] = useState(false);
-  const [consentNDA, setConsentNDA] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -20,7 +19,7 @@ export const UserForm: React.FC = () => {
     e.preventDefault();
     setFormError(null);
 
-    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy || !consentNDA) {
+    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy) {
       setFormError("Please fill out all required fields and accept the agreements.");
       return;
     }
@@ -131,32 +130,12 @@ export const UserForm: React.FC = () => {
               />
             </div>
 
-            <div className="space-y-3 pt-2">
+            <div className="pt-2">
               <ConsentCheckbox 
                 checked={consentPrivacy} 
                 onChange={setConsentPrivacy} 
-                label="I consent to the privacy policy" 
+                label="By submitting, you agree to our Privacy Policy and acknowledge our data handling practices." 
               />
-
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <div className="relative flex items-center justify-center mt-0.5 shrink-0">
-                  <input
-                    type="checkbox"
-                    required
-                    className="peer appearance-none w-5 h-5 border-2 border-brand-gold/30 rounded bg-brand-navy checked:bg-brand-gold checked:border-brand-gold transition-all cursor-pointer"
-                    checked={consentNDA}
-                    onChange={(e) => setConsentNDA(e.target.checked)}
-                  />
-                  <div className="absolute text-brand-navy opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                </div>
-                <span className="text-sm text-brand-text-secondary group-hover:text-brand-text-primary transition-colors leading-tight">
-                  I agree to the Non-Disclosure Agreement (NDA)
-                </span>
-              </label>
             </div>
 
             <div className="pt-2">
@@ -169,7 +148,7 @@ export const UserForm: React.FC = () => {
             </div>
 
             <button
-              disabled={loading || !consentPrivacy || !consentNDA || !captchaToken}
+              disabled={loading || !consentPrivacy || !captchaToken}
               type="submit"
               className="w-full btn-primary mt-6 mb-2 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
