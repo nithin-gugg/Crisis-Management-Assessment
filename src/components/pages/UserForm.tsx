@@ -5,20 +5,49 @@ import { useAssessment } from '@/context/AssessmentContext';
 import { motion } from 'framer-motion';
 import { User, Mail, Phone, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
 import { ConsentCheckbox } from '@/components/common/ConsentCheckbox';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export const UserForm: React.FC = () => {
   const { setUserData, nextStep, prevStep } = useAssessment();
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', company_website: '' });
   const [loading, setLoading] = useState(false);
   const [consentPrivacy, setConsentPrivacy] = useState(false);
   const [consentNDA, setConsentNDA] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy || !consentNDA) return;
+    setFormError(null);
+
+    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy || !consentNDA) {
+      setFormError("Please fill out all required fields and accept the agreements.");
+      return;
+    }
+
+    // Basic email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setFormError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!captchaToken) {
+      setFormError("Please verify that you are not a robot.");
+      return;
+    }
+
     setLoading(true);
     await new Promise((r) => setTimeout(r, 400)); // brief UX delay
-    setUserData(formData);
+
+    // Store data into tracking context encompassing security tokens
+    setUserData({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company_website: formData.company_website, // honeypot
+      captchaToken
+    });
+
     setLoading(false);
     nextStep();
   };
@@ -43,7 +72,23 @@ export const UserForm: React.FC = () => {
             <p className="text-brand-text-secondary text-xs">Please provide your details to begin the assessment.</p>
           </div>
 
+          {formError && (
+            <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-medium text-center">
+              {formError}
+            </motion.div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input 
+               type="text" 
+               name="company_website" 
+               className="hidden" 
+               aria-hidden="true" 
+               tabIndex={-1} 
+               autoComplete="off" 
+               value={formData.company_website} 
+               onChange={(e) => setFormData({...formData, company_website: e.target.value})} 
+            />
             <div className="space-y-1.5">
               <label className="text-sm font-semibold flex items-center gap-2 ml-1">
                 <User size={14} className="text-brand-gold" /> Full Name
@@ -114,8 +159,17 @@ export const UserForm: React.FC = () => {
               </label>
             </div>
 
+            <div className="pt-2">
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                onChange={(token) => setCaptchaToken(token)}
+                onErrored={() => setFormError("Security verification encountered an error. Please try again.")}
+                theme="dark"
+              />
+            </div>
+
             <button
-              disabled={loading || !consentPrivacy || !consentNDA}
+              disabled={loading || !consentPrivacy || !consentNDA || !captchaToken}
               type="submit"
               className="w-full btn-primary mt-6 mb-2 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >

@@ -50,7 +50,7 @@ export async function generatePDFBuffer(data: ReportData): Promise<Buffer> {
     page.drawImage(logoImg, { x: 30, y: height - 40 - (logoHeight / 2), width: logoWidth, height: logoHeight });
   }
 
-  page.drawText('Crisis Readiness Assessment Report', {
+  page.drawText('Your Workforce Resilience Score Report', {
     x: logoImg ? 125 : 30,
     y: height - 44, // Baseline aligned
     size: 16,

@@ -9,6 +9,7 @@ import type { UserData, Answer, AssessmentResults, SubmissionStatus } from '@/li
 interface AssessmentContextType {
   userData: UserData | null;
   setUserData: (data: UserData) => void;
+  submissionError: string | null;
   answers: Answer[];
   setAnswer: (questionId: number, score: number) => void;
   currentStep: number;
@@ -28,6 +29,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>('idle');
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   const setUserData = (data: UserData) => setUserDataState(data);
 
@@ -47,6 +49,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setCurrentStep(0);
     setUserDataState(null);
     setSubmissionStatus('idle');
+    setSubmissionError(null);
   };
 
   const isComplete = answers.length === QUESTIONS.length;
@@ -62,13 +65,16 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       const recommendations = getRecommendations(results.weakSections);
 
     try {
-      const res = await fetch('/api/submit-assessment', {
+      setSubmissionError(null);
+      const res = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: userData.name,
           email: userData.email,
           phone: userData.phone,
+          company_website: userData.company_website,
+          captchaToken: userData.captchaToken,
           score: results.totalScore,
           level: results.level,
           weakAreas: results.weakSections,
@@ -77,10 +83,14 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         }),
       });
 
-      if (!res.ok) throw new Error('Submission failed');
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Submission failed.');
+      }
       setSubmissionStatus('success');
-    } catch {
+    } catch (err: any) {
       setSubmissionStatus('error');
+      setSubmissionError(err.message || 'An unexpected error occurred.');
     }
   }, [userData, answers]);
 
@@ -98,6 +108,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         isComplete,
         getResults,
         submissionStatus,
+        submissionError,
         submitAssessment,
       }}
     >

@@ -20,7 +20,7 @@ import { IframeModal } from '@/components/common/Modal';
 import Footer from '@/components/Footer';
 
 export const Results: React.FC = () => {
-  const { userData, getResults, resetAssessment, submissionStatus, submitAssessment } = useAssessment();
+  const { userData, getResults, resetAssessment, submissionStatus, submissionError, submitAssessment } = useAssessment();
   const results = useMemo(() => getResults(), [getResults]);
   const recommendations = useMemo(() => getRecommendations(results.weakSections), [results.weakSections]);
   const [activeModule, setActiveModule] = useState<{ title: string; src: string } | null>(null);
@@ -119,7 +119,7 @@ export const Results: React.FC = () => {
             className="mb-6 flex items-center gap-3 px-5 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium"
           >
             <AlertTriangle size={16} className="shrink-0" />
-            Could not send the email report. You can still download it manually below.
+            {submissionError || "Could not send the email report. You can still download it manually below."}
           </motion.div>
         )}
 

@@ -3,7 +3,7 @@ import type { TrainingModule } from './types';
 export const TRAINING_MODULE_LIBRARY: Record<string, TrainingModule> = {
   BCP: {
     id: 'bcp',
-    title: 'Business Continuity & Crisis Response',
+    title: 'Business Continuity & Workforce Resilience Response',
     description: 'Master the fundamentals of maintaining operations during disruption.',
     src: '/videos/bccr.mp4',
   },

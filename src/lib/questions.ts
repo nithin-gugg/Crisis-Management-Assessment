@@ -6,12 +6,12 @@ export interface Question {
 
 export const QUESTIONS: Question[] = [
   // Leadership (Q1-Q3)
-  { id: 1, section: 'Leadership', text: 'Does your organization have a clearly defined crisis management team with assigned roles and responsibilities?' },
-  { id: 2, section: 'Leadership', text: 'Is there a formal process for periodic review and updating of crisis response plans by executive leadership?' },
+  { id: 1, section: 'Leadership', text: 'Does your organization have a clearly defined workforce resilience team with assigned roles and responsibilities?' },
+  { id: 2, section: 'Leadership', text: 'Is there a formal process for periodic review and updating of workforce resilience response plans by executive leadership?' },
   { id: 3, section: 'Leadership', text: 'Are decision-making protocols established for rapid response during high-pressure scenarios?' },
 
   // Communication (Q4-Q6)
-  { id: 4, section: 'Communication', text: 'Do you have a pre-approved internal communication strategy to reach all employees instantly during a crisis?' },
+  { id: 4, section: 'Communication', text: 'Do you have a pre-approved internal communication strategy to reach all employees instantly during workforce resilience events?' },
   { id: 5, section: 'Communication', text: 'Is there a designated spokesperson and external communication plan for media and stakeholders?' },
   { id: 6, section: 'Communication', text: 'Are multi-channel communication tools (SMS, App, Email) tested and ready for deployment?' },
 
@@ -22,12 +22,12 @@ export const QUESTIONS: Question[] = [
 
   // Workforce (Q10-Q12)
   { id: 10, section: 'Workforce', text: 'Are safety and security protocols for on-site personnel clearly communicated and practiced?' },
-  { id: 11, section: 'Workforce', text: 'Does the organization provide mental health and resilience support specifically for crisis scenarios?' },
+  { id: 11, section: 'Workforce', text: 'Does the organization provide mental health and workforce resilience support for high-stress scenarios?' },
   { id: 12, section: 'Workforce', text: 'Is there a system to track and verify the safety of all employees in real-time during an emergency?' },
 
   // Training (Q13-Q15)
-  { id: 13, section: 'Training', text: 'Are employees regularly trained on crisis protocols through simulation drills or eLearning?' },
-  { id: 14, section: 'Training', text: 'Is there specialized training for managers on leading remote or stressed teams during a crisis?' },
+  { id: 13, section: 'Training', text: 'Are employees regularly trained on workforce resilience protocols through simulation drills or eLearning?' },
+  { id: 14, section: 'Training', text: 'Is there specialized training for managers on leading remote or stressed teams during high-pressure situations?' },
   { id: 15, section: 'Training', text: 'Do you conduct "Post-Incident Reviews" to update training programs based on lessons learned?' },
 ];
 

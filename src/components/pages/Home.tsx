@@ -9,9 +9,9 @@ import Footer from '@/components/Footer';
 const SOLUTIONS = [
   {
     icon: ShieldCheck,
-    title: 'Business Continuity & Crisis Response',
+    title: 'Business Continuity & Workforce Resilience Response',
     description:
-      'Emergency protocols, evacuation procedures, shelter-in-place and crisis communication modules tailored for industry sectors.',
+      'Emergency protocols, evacuation procedures, shelter-in-place and resilience communication modules tailored for industry sectors.',
   },
   {
     icon: Globe,
@@ -27,7 +27,7 @@ const SOLUTIONS = [
   {
     icon: Activity,
     title: 'Mental Health & Workforce Resilience',
-    description: 'Stress management and crisis psychology programs in Arabic & English.',
+    description: 'Stress management and workforce resilience psychology programs in Arabic & English.',
   },
   {
     icon: Users,
@@ -59,7 +59,7 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-sm font-semibold tracking-wider uppercase mb-6 border border-brand-gold/20">
-              GCC Crisis Response · Rapid Deployment
+              Get Your Workforce Resilience Score
             </span>
             <h1 className="text-4xl md:text-6xl font-extrabold text-brand-text-primary mb-6 leading-tight max-w-4xl mx-auto">
               Business Continuity <br />
