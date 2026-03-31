@@ -9,10 +9,12 @@ export const UserForm: React.FC = () => {
   const { setUserData, nextStep, prevStep } = useAssessment();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [loading, setLoading] = useState(false);
+  const [consentPrivacy, setConsentPrivacy] = useState(false);
+  const [consentNDA, setConsentNDA] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone) return;
+    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy || !consentNDA) return;
     setLoading(true);
     await new Promise((r) => setTimeout(r, 400)); // brief UX delay
     setUserData(formData);
@@ -83,8 +85,50 @@ export const UserForm: React.FC = () => {
               />
             </div>
 
+            <div className="space-y-3 pt-2">
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <div className="relative flex items-center justify-center mt-0.5 shrink-0">
+                  <input
+                    type="checkbox"
+                    required
+                    className="peer appearance-none w-5 h-5 border-2 border-brand-gold/30 rounded bg-brand-navy checked:bg-brand-gold checked:border-brand-gold transition-all cursor-pointer"
+                    checked={consentPrivacy}
+                    onChange={(e) => setConsentPrivacy(e.target.checked)}
+                  />
+                  <div className="absolute text-brand-navy opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <span className="text-sm text-brand-text-secondary group-hover:text-brand-text-primary transition-colors leading-tight">
+                  I consent to privacy policy of the details
+                </span>
+              </label>
+
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <div className="relative flex items-center justify-center mt-0.5 shrink-0">
+                  <input
+                    type="checkbox"
+                    required
+                    className="peer appearance-none w-5 h-5 border-2 border-brand-gold/30 rounded bg-brand-navy checked:bg-brand-gold checked:border-brand-gold transition-all cursor-pointer"
+                    checked={consentNDA}
+                    onChange={(e) => setConsentNDA(e.target.checked)}
+                  />
+                  <div className="absolute text-brand-navy opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <span className="text-sm text-brand-text-secondary group-hover:text-brand-text-primary transition-colors leading-tight">
+                  I agree to the Non-Disclosure Agreement (NDA)
+                </span>
+              </label>
+            </div>
+
             <button
-              disabled={loading}
+              disabled={loading || !consentPrivacy || !consentNDA}
               type="submit"
               className="w-full btn-primary mt-6 mb-2 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >

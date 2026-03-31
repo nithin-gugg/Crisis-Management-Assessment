@@ -19,9 +19,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Crisis Readiness Assessment | Maple Learning Solutions',
     description:
-      'Assess your organization\'s crisis management readiness and get a personalized report.',
+      "Assess your organization's crisis management readiness and get a personalized report.",
     type: 'website',
-    url: "https://gccbcp.maplelearningsolutions.com/", 
+    url: "https://gccbcp.maplelearningsolutions.com/",
+    images: [
+      {
+        url: "https://gccbcp.maplelearningsolutions.com/og-image.webp", // ✅ IMPORTANT
+        width: 1200,
+        height: 630,
+        alt: "Crisis Readiness Assessment",
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Crisis Readiness Assessment | Maple Learning Solutions',
+    description:
+      "Assess your organization's crisis management readiness and get a personalized report.",
+    images: ["https://gccbcp.maplelearningsolutions.com/og-image.webp"], // ✅ IMPORTANT
   },
 };
 
