@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
 import { motion } from 'framer-motion';
-import { User, Mail, Phone, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
+import { User, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
 import { ConsentCheckbox } from '@/components/common/ConsentCheckbox';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export const UserForm: React.FC = () => {
   const { setUserData, nextStep, prevStep } = useAssessment();
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', company_website: '' });
+  const [formData, setFormData] = useState({ name: '', company_website: '' });
   const [loading, setLoading] = useState(false);
   const [consentPrivacy, setConsentPrivacy] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
@@ -19,14 +19,8 @@ export const UserForm: React.FC = () => {
     e.preventDefault();
     setFormError(null);
 
-    if (!formData.name || !formData.email || !formData.phone || !consentPrivacy) {
-      setFormError("Please fill out all required fields and accept the agreements.");
-      return;
-    }
-
-    // Basic email validation
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setFormError("Please enter a valid email address.");
+    if (!formData.name || !consentPrivacy) {
+      setFormError("Please fill out your name and accept the agreements.");
       return;
     }
 
@@ -41,8 +35,6 @@ export const UserForm: React.FC = () => {
     // Store data into tracking context encompassing security tokens
     setUserData({
       name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
       company_website: formData.company_website, // honeypot
       captchaToken
     });
@@ -99,34 +91,6 @@ export const UserForm: React.FC = () => {
                 className="w-full h-12 bg-brand-navy border border-brand-gold/20 rounded-xl px-4 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder:text-brand-text-muted text-brand-text-primary"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-semibold flex items-center gap-2 ml-1">
-                <Mail size={14} className="text-brand-gold" /> Email Address
-              </label>
-              <input
-                required
-                type="email"
-                placeholder="john@organization.com"
-                className="w-full h-12 bg-brand-navy border border-brand-gold/20 rounded-xl px-4 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder:text-brand-text-muted text-brand-text-primary"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-semibold flex items-center gap-2 ml-1">
-                <Phone size={14} className="text-brand-gold" /> Phone Number
-              </label>
-              <input
-                required
-                type="tel"
-                placeholder="+971 -- --- ----"
-                className="w-full h-12 bg-brand-navy border border-brand-gold/20 rounded-xl px-4 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder:text-brand-text-muted text-brand-text-primary"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
             </div>
 

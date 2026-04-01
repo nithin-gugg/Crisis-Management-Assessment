@@ -5,7 +5,7 @@ import path from 'path';
 export interface ReportData {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   score: number;
   level: string;
   weakAreas: string[];
@@ -78,7 +78,6 @@ export async function generatePDFBuffer(data: ReportData): Promise<Buffer> {
   for (const [label, value] of [
     ['Name',  data.name],
     ['Email', data.email],
-    ['Phone', data.phone],
     ['Date',  new Date().toLocaleDateString('en-GB')],
   ]) {
     page.drawText(`${label}:`, { x: leftMar,  y, size: 10, font: fontBold, color: rgb(0.3, 0.3, 0.3) });

@@ -96,7 +96,7 @@ async function sendEmail(params: {
 async function sendToGoogleSheets(data: {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   score: number;
   level: string;
   weakAreas: string[];
@@ -108,7 +108,7 @@ async function sendToGoogleSheets(data: {
     timestamp: new Date().toISOString(),
     name: data.name,
     email: data.email,
-    phone: data.phone,
+    phone: data.phone || '',
     score: data.score,
     level: data.level,
     weakAreas: data.weakAreas.join(', ')

@@ -26,16 +26,7 @@ export const Results: React.FC = () => {
   const [activeModule, setActiveModule] = useState<{ title: string; src: string } | null>(null);
   const [downloadLoading, setDownloadLoading] = useState(false);
 
-  const hasSubmittedRef = useRef(false);
-
-  // Trigger API submission once when Results page mounts.
-  // useRef guard ensures exactly one call even in React Strict Mode (which
-  // intentionally mounts components twice in development).
-  useEffect(() => {
-    if (hasSubmittedRef.current) return;
-    hasSubmittedRef.current = true;
-    submitAssessment();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // Results does not trigger submission anymore; it's handled by ScoreCheckForm.
 
 
   const getReadinessConfig = (level: string) => {
@@ -99,7 +90,7 @@ export const Results: React.FC = () => {
             className="mb-6 flex items-center gap-3 px-5 py-3 rounded-xl bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-sm font-medium"
           >
             <Loader2 size={16} className="animate-spin shrink-0" />
-            Generating your report and sending it to {userData?.email}...
+            Generating your report and sending it to your inbox...
           </motion.div>
         )}
         {submissionStatus === 'success' && (
@@ -109,7 +100,7 @@ export const Results: React.FC = () => {
             className="mb-6 flex items-center gap-3 px-5 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium"
           >
             <CheckCircle2 size={16} className="shrink-0" />
-            Report sent to {userData?.email} — check your inbox for the PDF!
+            Report sent to {userData?.email} — check your inbox!
           </motion.div>
         )}
         {submissionStatus === 'error' && (

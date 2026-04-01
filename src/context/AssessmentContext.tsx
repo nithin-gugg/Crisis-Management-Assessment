@@ -8,7 +8,7 @@ import type { UserData, Answer, AssessmentResults, SubmissionStatus } from '@/li
 
 interface AssessmentContextType {
   userData: UserData | null;
-  setUserData: (data: UserData) => void;
+  setUserData: (data: Partial<UserData>) => void;
   submissionError: string | null;
   answers: Answer[];
   setAnswer: (questionId: number, score: number) => void;
@@ -31,7 +31,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>('idle');
   const [submissionError, setSubmissionError] = useState<string | null>(null);
 
-  const setUserData = (data: UserData) => setUserDataState(data);
+  const setUserData = (data: Partial<UserData>) => setUserDataState((prev) => (prev ? { ...prev, ...data } : data as UserData));
 
   const setAnswer = (questionId: number, score: number) => {
     setAnswers((prev) => {
