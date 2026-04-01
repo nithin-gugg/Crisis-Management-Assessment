@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
         <nav className="flex items-center gap-6">
           {currentStep === 0 ? (
             <button onClick={nextStep} className="btn-primary flex items-center gap-2 group text-sm py-2 px-4 shadow-none">
-               Get Started <Zap size={16} className="group-hover:animate-pulse" />
+               Get Your Score Now <Zap size={16} className="group-hover:animate-pulse" />
             </button>
           ) : isComplete ? (
             <Link 

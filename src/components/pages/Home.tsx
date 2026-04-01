@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { useAssessment } from '@/context/AssessmentContext';
 import { ShieldCheck, Users, Zap, Globe, Lock, Activity, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -12,32 +13,38 @@ const SOLUTIONS = [
     title: 'Business Continuity & Workforce Resilience Response',
     description:
       'Emergency protocols, evacuation procedures, shelter-in-place and resilience communication modules tailored for industry sectors.',
+    thumbnail: '/thumbnails/bcc.webp',
   },
   {
     icon: Globe,
     title: 'Remote Work & Digital Operations',
     description:
       'Digital workflows, virtual leadership and collaboration tools training ready for deployment within days.',
+    thumbnail: '/thumbnails/remote.webp',
   },
   {
     icon: Lock,
     title: 'Safety & Security Awareness',
     description: 'Drone threat response, cybersecurity awareness and infrastructure safety training.',
+    thumbnail: '/thumbnails/safety.webp',
   },
   {
     icon: Activity,
     title: 'Mental Health & Workforce Resilience',
     description: 'Stress management and workforce resilience psychology programs in Arabic & English.',
+    thumbnail: '/thumbnails/mental-health.webp',
   },
   {
     icon: Users,
     title: 'Healthcare & Emergency Services',
     description: 'Surge capacity, triage procedures and PPE compliance training.',
+    thumbnail: '/thumbnails/hospital.webp',
   },
   {
     icon: GraduationCap,
     title: 'Government & Defense Upskilling',
     description: 'Civil defence operations and logistics capability programs.',
+    thumbnail: '/thumbnails/govt.webp', // Generic fallback
   },
 ];
 
@@ -59,7 +66,7 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-sm font-semibold tracking-wider uppercase mb-6 border border-brand-gold/20">
-              Get Your Workforce Resilience Score
+              Workforce Resilience Framework
             </span>
             <h1 className="text-4xl md:text-6xl font-extrabold text-brand-text-primary mb-6 leading-tight max-w-4xl mx-auto">
               Business Continuity <br />
@@ -83,7 +90,7 @@ export const Home: React.FC = () => {
             </div>
 
             <button onClick={nextStep} className="btn-primary flex items-center gap-2 group mx-auto">
-              Get Started <Zap size={18} className="group-hover:animate-pulse" />
+              Get Your Score Now <Zap size={18} className="group-hover:animate-pulse" />
             </button>
           </motion.div>
         </div>
@@ -101,13 +108,30 @@ export const Home: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="card-premium group"
+                className="card-premium group !p-0 overflow-hidden flex flex-col"
               >
-                <div className="h-12 w-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-4 group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
-                  <item.icon size={24} />
+                <div className="relative aspect-video w-full overflow-hidden bg-brand-navy-light">
+                  <Image
+                    src={item.thumbnail}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-brand-navy/30 group-hover:bg-brand-navy/10 transition-colors duration-300" />
                 </div>
-                <h3 className="font-bold text-lg leading-tight mb-2 [text-wrap:balance]">{item.title}</h3>
-                <p className="text-brand-text-muted text-sm leading-relaxed">{item.description}</p>
+                
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="h-10 w-10 rounded-lg bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-4 group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
+                    <item.icon size={20} />
+                  </div>
+                  <h3 className="font-bold text-lg leading-tight mb-2 [text-wrap:balance] group-hover:text-brand-gold transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-brand-text-muted text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

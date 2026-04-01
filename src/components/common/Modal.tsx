@@ -44,6 +44,7 @@ export const IframeModal: React.FC<ModalProps> = ({ isOpen, onClose, title, vide
       
       player = new Plyr(videoEl, {
         autoplay: true,
+        muted: true, // For more reliable autoplay across browsers
         controls: [
           'play-large',
           'rewind',
@@ -71,7 +72,12 @@ export const IframeModal: React.FC<ModalProps> = ({ isOpen, onClose, title, vide
       };
       
       player.on('ready', () => {
-        if (!isCancelled) setLoading(false);
+        if (!isCancelled) {
+          setLoading(false);
+          player.play().catch((err: any) => {
+            console.log("Autoplay was prevented:", err);
+          });
+        }
       });
     }).catch(err => {
       console.error('Failed to load plyr', err);
