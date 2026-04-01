@@ -32,16 +32,16 @@ export const Results: React.FC = () => {
   const getReadinessConfig = (level: string) => {
     switch (level) {
       case 'High':
-        return { color: 'text-green-500', bg: 'bg-green-500/10', border: 'border-green-500/20', text: 'Resilient' };
+        return { color: 'text-green-500', bg: 'bg-green-500/10', border: 'border-green-500/20', text: 'demonstrates well-established systems and processes that support effective and resilient responses to complex and evolving situations.' };
       case 'Moderate':
         return {
           color: 'text-brand-gold',
           bg: 'bg-brand-gold/10',
           border: 'border-brand-gold/20',
-          text: 'Developing',
+          text: 'has foundational systems in place, though certain gaps may affect overall effectiveness when responding to unexpected disruptions.',
         };
       default:
-        return { color: 'text-red-500', bg: 'bg-red-500/10', border: 'border-red-500/20', text: 'Vulnerable' };
+        return { color: 'text-red-500', bg: 'bg-red-500/10', border: 'border-red-500/20', text: 'operating with limited preparedness structures, which may lead to delayed or less effective responses during challenging situations.' };
     }
   };
 
