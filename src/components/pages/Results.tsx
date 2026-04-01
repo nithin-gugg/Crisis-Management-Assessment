@@ -69,7 +69,7 @@ export const Results: React.FC = () => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Crisis_Readiness_Report_${userData.name.replace(/\s+/g, '_')}.pdf`;
+      a.download = `Workforce_Resilience_Report_${userData.name.replace(/\s+/g, '_')}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {
@@ -210,7 +210,7 @@ export const Results: React.FC = () => {
 
         {/* Next Steps CTA */}
         <div className="bg-brand-navy-light/40 border border-brand-gold/10 rounded-3xl p-8 md:p-12 text-center">
-          <h3 className="text-3xl font-bold mb-4">Maximize Your Work Resilience</h3>
+          <h3 className="text-3xl font-bold mb-4">Maximize Your Workforce Resilience</h3>
           <p className="text-brand-text-secondary max-w-2xl mx-auto mb-10">
             Download your detailed report or speak with our GCC workforce resilience experts for a customized training
             roadmap.

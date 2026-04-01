@@ -52,7 +52,7 @@ export const ScoreCheckForm: React.FC = () => {
             </div>
             <h2 className="text-2xl font-bold mb-2">Assessment Complete!</h2>
             <p className="text-brand-text-secondary text-sm">
-              Great job, <span className="text-brand-gold font-bold">{userData?.name || 'there'}</span>! Your readiness score is ready. Enter your email to view your personalized report.
+              Great job, <span className="text-brand-gold font-bold">{userData?.name || 'there'}</span>! Your Resilience score is ready. Enter your email to view your personalized report.
             </p>
           </div>
 

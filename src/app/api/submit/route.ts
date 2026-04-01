@@ -84,7 +84,7 @@ async function sendEmail(params: {
         cid: 'logo' // same cid value as in the html img src
       },
       {
-        filename: `Assessment_Report_${params.name.replace(/\s+/g, '_')}.pdf`,
+        filename: `Workforce_Resilience_Report_${params.name.replace(/\s+/g, '_')}.pdf`,
         content: params.pdfBuffer,
         contentType: 'application/pdf',
       },

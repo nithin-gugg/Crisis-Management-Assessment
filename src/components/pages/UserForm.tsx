@@ -59,7 +59,7 @@ export const UserForm: React.FC = () => {
             <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-brand-gold/10 text-brand-gold mb-3">
               <ShieldCheck size={28} />
             </div>
-            <h2 className="text-xl font-bold mb-1">Get Your Readiness Score</h2>
+            <h2 className="text-xl font-bold mb-1">Get Your Workforce Resilience Score</h2>
             <p className="text-brand-text-secondary text-xs">Please provide your details to begin the assessment.</p>
           </div>
 
@@ -82,7 +82,7 @@ export const UserForm: React.FC = () => {
             />
             <div className="space-y-1.5">
               <label className="text-sm font-semibold flex items-center gap-2 ml-1">
-                <User size={14} className="text-brand-gold" /> Full Name
+                <User size={14} className="text-brand-gold" /> Enter Your Name
               </label>
               <input
                 required
