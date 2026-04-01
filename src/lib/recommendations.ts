@@ -6,24 +6,28 @@ export const TRAINING_MODULE_LIBRARY: Record<string, TrainingModule> = {
     title: 'Business Continuity & Workforce Resilience Response',
     description: 'Master the fundamentals of maintaining operations during disruption.',
     src: '/videos/bccr.mp4',
+    thumbnail: '/thumbnails/bcc.webp',
   },
   REMOTE: {
     id: 'remote',
     title: 'Remote Work & Digital Operations',
     description: 'Strategies for managing distributed teams and secure digital workflows.',
-    src: '/videos/remote.mp4'
+    src: '/videos/remote.mp4',
+    thumbnail: '/thumbnails/remote.webp',
   },
   SAFETY: {
     id: 'safety',
     title: 'Safety & Security Awareness',
     description: 'Essential protocols for physical security and personnel safety.',
     src: '/videos/safety.mp4',
+    thumbnail: '/thumbnails/safety.webp',
   },
   RESILIENCE: {
     id: 'resilience',
     title: 'Mental Health & Workforce Resilience',
     description: 'Techniques to support employee wellbeing during high-stress periods.',
     src: '/videos/mental-health.mp4',
+    thumbnail: '/thumbnails/mental-health.webp',
   },
 };
 

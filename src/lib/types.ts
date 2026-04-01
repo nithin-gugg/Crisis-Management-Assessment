@@ -22,6 +22,7 @@ export interface TrainingModule {
   title: string;
   description: string;
   src: string;
+  thumbnail?: string;
 }
 
 export type SubmissionStatus = 'idle' | 'loading' | 'success' | 'error';

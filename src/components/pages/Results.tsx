@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useAssessment } from '@/context/AssessmentContext';
 import { getRecommendations } from '@/lib/recommendations';
 import { motion } from 'framer-motion';
@@ -181,28 +182,51 @@ export const Results: React.FC = () => {
             <h3 className="text-2xl font-bold">Recommended Training Modules</h3>
             <span className="text-xs uppercase tracking-widest text-brand-gold font-bold">Expert-curated for you</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {recommendations.map((rec, index) => (
               <motion.div
                 key={rec.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="card-premium flex flex-col group cursor-pointer"
+                className="card-premium flex flex-col group cursor-pointer overflow-hidden !p-0"
                 onClick={() => setActiveModule(rec)}
               >
-                <div className="flex-grow">
-                  <div className="h-12 w-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-6 group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
-                    <Play size={20} fill="currentColor" />
+                <div className="relative aspect-video w-full overflow-hidden bg-brand-navy-light">
+                  {rec.thumbnail ? (
+                    <Image
+                      src={rec.thumbnail}
+                      alt={rec.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-brand-gold/5">
+                      <Play size={32} className="text-brand-gold/20" />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-brand-navy/40 group-hover:bg-brand-navy/20 transition-colors duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="h-14 w-14 rounded-full bg-brand-gold text-brand-navy flex items-center justify-center shadow-2xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                      <Play size={28} fill="currentColor" className="ml-1" />
+                    </div>
                   </div>
+                </div>
+                
+                <div className="p-6 flex-grow flex flex-col">
                   <h4 className="text-xl font-bold mb-3 leading-tight group-hover:text-brand-gold transition-colors [text-wrap:balance]">
                     {rec.title}
                   </h4>
-                  <p className="text-brand-text-muted text-sm leading-relaxed">{rec.description}</p>
+                  <p className="text-brand-text-muted text-sm leading-relaxed mb-6 line-clamp-3">
+                    {rec.description}
+                  </p>
+                  <div className="mt-auto">
+                    <button className="flex items-center gap-2 text-brand-gold font-bold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                      Start Module <ExternalLink size={16} />
+                    </button>
+                  </div>
                 </div>
-                <button className="mt-8 flex items-center gap-2 text-brand-gold font-bold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  Start Module <ExternalLink size={16} />
-                </button>
               </motion.div>
             ))}
           </div>
