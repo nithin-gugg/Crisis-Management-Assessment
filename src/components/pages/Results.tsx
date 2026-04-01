@@ -124,7 +124,7 @@ export const Results: React.FC = () => {
             <TrendingUp size={48} />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-            Your Crisis Readiness: <span className={config.color}>{results.level}</span>
+            Your Workforce Resilience Score: <span className={config.color}>{results.level}</span>
           </h2>
           <p className="text-brand-text-secondary text-lg">
             Based on your responses, your organization is currently{' '}
@@ -210,9 +210,9 @@ export const Results: React.FC = () => {
 
         {/* Next Steps CTA */}
         <div className="bg-brand-navy-light/40 border border-brand-gold/10 rounded-3xl p-8 md:p-12 text-center">
-          <h3 className="text-3xl font-bold mb-4">Maximize Your Crisis Readiness</h3>
+          <h3 className="text-3xl font-bold mb-4">Maximize Your Work Resilience</h3>
           <p className="text-brand-text-secondary max-w-2xl mx-auto mb-10">
-            Download your detailed report or speak with our GCC crisis management experts for a customized training
+            Download your detailed report or speak with our GCC workforce resilience experts for a customized training
             roadmap.
           </p>
 

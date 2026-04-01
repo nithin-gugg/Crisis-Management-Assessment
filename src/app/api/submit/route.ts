@@ -159,8 +159,12 @@ export async function POST(req: NextRequest) {
     // 4. Zod Input Validation
     const validationResult = submitSchema.safeParse(rawBody);
     if (!validationResult.success) {
-      console.warn(`[VALIDATION] Bad inputs from IP: ${ip}`, validationResult.error.flatten());
-      return NextResponse.json({ success: false, error: 'Invalid formulation input parameters' }, { status: 400 });
+      console.error(`[VALIDATION ERROR] Zod failed for IP: ${ip}`, validationResult.error.format());
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Invalid formulation input parameters',
+        details: validationResult.error.format()
+      }, { status: 400 });
     }
 
     // 5. Deep payload sanitization ensuring XSS logic removal for PDF safety

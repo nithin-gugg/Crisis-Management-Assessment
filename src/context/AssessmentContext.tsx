@@ -19,7 +19,7 @@ interface AssessmentContextType {
   isComplete: boolean;
   getResults: () => AssessmentResults;
   submissionStatus: SubmissionStatus;
-  submitAssessment: () => Promise<void>;
+  submitAssessment: (email?: string) => Promise<void>;
 }
 
 const AssessmentContext = createContext<AssessmentContextType | undefined>(undefined);
@@ -56,8 +56,15 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   const getResults = useCallback(() => calculateResults(answers), [answers]);
 
-  const submitAssessment = useCallback(async () => {
+  const submitAssessment = useCallback(async (emailOverride?: string) => {
     if (!userData) return;
+    
+    // Prioritize the passed email from the form over the (unreliable) state during submission
+    const currentEmail = emailOverride || userData.email;
+    if (!currentEmail) {
+       throw new Error("Email is required for submission.");
+    }
+
     if (submissionStatus === 'loading' || submissionStatus === 'success') return;
     setSubmissionStatus('loading');
 
@@ -71,7 +78,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: userData.name,
-          email: userData.email,
+          email: currentEmail,
           phone: userData.phone,
           company_website: userData.company_website,
           captchaToken: userData.captchaToken,

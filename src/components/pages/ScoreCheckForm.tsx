@@ -31,7 +31,7 @@ export const ScoreCheckForm: React.FC = () => {
       setUserData({ email });
       
       // 2. Submit assessment
-      await submitAssessment();
+      await submitAssessment(email);
       
       // 3. Move to results
       nextStep();
