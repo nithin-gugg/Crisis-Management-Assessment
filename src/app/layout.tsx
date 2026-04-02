@@ -19,9 +19,9 @@ keywords:
   },
 
   openGraph: {
-    title: 'Crisis Readiness Assessment | Maple Learning Solutions',
-    description:
-      "Assess your organization's crisis management readiness and get a personalized report.",
+    title: 'Workforce Resilience Assessment | Maple Learning Solutions',
+description:
+  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
     type: 'website',
     url: 'https://gccbcp.maplelearningsolutions.com/',
     siteName: 'Maple Learning Solutions',
@@ -32,7 +32,7 @@ keywords:
         secureUrl: 'https://gccbcp.maplelearningsolutions.com/og-image.webp',
         width: 1200,
         height: 630,
-        alt: 'Crisis Readiness Assessment Thumbnail',
+        alt: 'Workforce Resilience Assessment Thumbnail',
         type: 'image/webp',
       },
     ],
@@ -40,9 +40,9 @@ keywords:
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Crisis Readiness Assessment | Maple Learning Solutions',
-    description:
-      "Assess your organization's crisis management readiness and get a personalized report.",
+    title: 'Workforce Resilience Assessment | Maple Learning Solutions',
+description:
+  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
     images: ['https://gccbcp.maplelearningsolutions.com/og-image.webp'], // ✅ IMPORTANT
   },
   
