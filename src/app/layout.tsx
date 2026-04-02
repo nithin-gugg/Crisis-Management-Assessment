@@ -7,12 +7,11 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
-  title: 'Crisis Readiness Assessment | Maple Learning Solutions',
-  description:
-    "Assess your organization's crisis management readiness and get a personalized report.",
-  keywords:
-    'crisis management, business continuity, GCC, readiness assessment, eLearning',
-  applicationName: 'Maple Learning Solutions',
+  title: 'Workforce Resilience Assessment | Maple Learning Solutions',
+description:
+  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
+keywords:
+  'workforce resilience, resilience assessment, employee resilience, organizational resilience, business continuity, resilience training, eLearning',
   authors: [{ name: 'Maple Learning Solutions' }],
 
   alternates: {
