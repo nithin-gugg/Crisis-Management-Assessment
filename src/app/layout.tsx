@@ -2,8 +2,86 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AssessmentProvider } from '@/context/AssessmentContext';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Maple Learning Solutions",
+      "url": "https://gccbcp.maplelearningsolutions.com/",
+      "logo": "https://maplelearningsolutions.com/logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/maple-learning-solutions"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "GCC"
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "Workforce Resilience Training in GCC | BCP & Readiness",
+      "description": "Workforce resilience training program designed to help organizations in the GCC region build business continuity, workforce resilience, and effective response strategies during disruptions.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Maple Learning Solutions",
+        "url": "https://maplelearningsolutions.com/"
+      },
+      "educationalLevel": "Professional",
+      "inLanguage": "en",
+      "url": "https://gccbcp.maplelearningsolutions.com/",
+      "image": "https://maplelearningsolutions.com/logo.png",
+      "offers": {
+        "@type": "Offer",
+        "category": "Training",
+        "availability": "https://schema.org/InStock",
+        "url": "https://gccbcp.maplelearningsolutions.com/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is workforce resilience training?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Workforce resilience training helps organizations prepare for disruptions by equipping teams with skills in communication, decision-making, and coordinated response."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is business continuity planning important?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Business continuity planning ensures that critical operations can continue during disruptions, minimizing downtime and maintaining organizational stability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who should take workforce resilience training?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This training is designed for leaders, HR professionals, operations teams, and employees responsible for safety, compliance, and business continuity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does simulation-based training support workforce resilience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simulation-based training uses real-world scenarios to help teams practice communication, coordination, and decision-making during high-pressure situations."
+          }
+        }
+      ]
+    }
+  ]
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
@@ -60,6 +138,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans`}>
+        {/* ✅ JSON-LD Schema */}
+        <Script
+          id="schema-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+          strategy="afterInteractive"
+        />
         <AssessmentProvider>
           {children}
         </AssessmentProvider>

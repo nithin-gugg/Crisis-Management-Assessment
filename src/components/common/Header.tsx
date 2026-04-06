@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-50 w-full bg-brand-navy/80 backdrop-blur-md border-b border-brand-gold/10">
       <div className="max-w-[1220px] mx-auto px-4 h-20 flex items-center justify-between">
         <div className="flex items-center gap-4 group cursor-pointer">
-          <div className="h-14 w-auto flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <div className="h-[45px] md:h-14 w-auto flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/logo.png"
               alt="Maple Learning Logo"
