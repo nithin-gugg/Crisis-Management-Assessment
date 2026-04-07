@@ -85,9 +85,9 @@ const schemaData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
-  title: 'Workforce Resilience Assessment | Maple Learning Solutions',
+  title: 'Business Continuity Management in UAE | Training & Solutions',
 description:
-  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
+  "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
 keywords:
   'workforce resilience, resilience assessment, employee resilience, organizational resilience, business continuity, resilience training, eLearning',
   authors: [{ name: 'Maple Learning Solutions' }],

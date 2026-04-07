@@ -11,39 +11,64 @@ const SOLUTIONS = [
   {
     icon: ShieldCheck,
     title: 'Business Continuity & Workforce Resilience Response',
-    description:
-      'Emergency protocols, evacuation procedures, shelter-in-place and resilience communication modules tailored for industry sectors.',
+    description:(
+      <>  
+      Emergency protocols, evacuation procedures, and shelter-in-place training aligned with <strong>Business Continuity Management</strong> frameworks, enabling teams to respond effectively during <span className='italic'>crisis situations</span>.
+      </>
+    ),
+      
     thumbnail: '/thumbnails/bcc.webp',
   },
   {
     icon: Globe,
     title: 'Remote Work & Digital Operations',
-    description:
-      'Digital workflows, virtual leadership and collaboration tools training ready for deployment within days.',
+    description:(
+      <>
+      Digital workflows and virtual leadership training designed to support <strong>business continuity planning</strong> and maintain operational stability during disruptions and <span className='italic'>crisis scenarios</span>.
+      </>
+    ),
     thumbnail: '/thumbnails/remote.webp',
   },
   {
     icon: Lock,
     title: 'Safety & Security Awareness',
-    description: 'Drone threat response, cybersecurity awareness and infrastructure safety training.',
+    description: (
+      <>  
+      Comprehensive safety and cybersecurity training programs that strengthen <strong>crisis management preparedness</strong> and ensure workforce readiness against emerging threats.
+      </>
+    ),
     thumbnail: '/thumbnails/safety.webp',
   },
   {
     icon: Activity,
     title: 'Mental Health & Workforce Resilience',
-    description: 'Stress management and workforce resilience psychology programs in Arabic & English.',
+    description:(
+      <>
+      Stress management and resilience programs that 
+      support employees during disruptions, enhancing 
+      <strong> crisis response capability</strong> and overall <span className='italic'>business continuity readiness</span>.
+      </>
+    ),
     thumbnail: '/thumbnails/mental-health.webp',
   },
   {
     icon: Users,
     title: 'Healthcare & Emergency Services',
-    description: 'Surge capacity, triage procedures and PPE compliance training.',
+     description:(
+      <>
+      Training for surge capacity, triage procedures, and compliance aligned with <strong>Business Continuity Management</strong> to ensure effective response during emergencies and <span className='italic'>crisis situations</span>.  
+      </>
+    ),
     thumbnail: '/thumbnails/hospital.webp',
   },
   {
     icon: GraduationCap,
     title: 'Government & Defense Upskilling',
-    description: 'Civil defence operations and logistics capability programs.',
+    description: (
+      <>  
+      Capability-building programs focused on operational readiness, supporting <strong>crisis management strategies</strong> and national-level <span className='italic'>business continuity preparedness</span>.
+      </>
+    ),
     thumbnail: '/thumbnails/govt.webp', // Generic fallback
   },
 ];
@@ -64,7 +89,7 @@ export const Home: React.FC = () => {
             //  src="/hero-image.webp"
              src="/12074.jpg"
             //  src="/16038.jpg"
-            alt="Workforce Resilience"
+            alt="Business continuity Management"
             fill
             className="object-cover object-center opacity-60 md:opacity-100"
             priority
@@ -80,16 +105,15 @@ export const Home: React.FC = () => {
             className="max-w-2xl flex flex-col items-center md:items-start text-center md:text-left"
           >
             <span className="inline-block px-4 py-1 rounded-full bg-brand-gold/10 text-brand-gold text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-6 border border-brand-gold/20 backdrop-blur-sm">
-              Workforce Resilience Framework
+              Business Continuity Framework
             </span>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-text-primary mb-6 leading-[1.1] [text-wrap:balance]">
               Business Continuity <br />
-              <span className="text-brand-gold">Process Solutions</span> <br />
-              for the GCC
+              <span className="text-brand-gold">Management Training</span> <br />
+              in UAE
             </h1>
             <p className="text-base md:text-lg text-brand-text-secondary/90 mb-10 leading-relaxed max-w-xl">
-              Maple Learning Solutions delivers AI-powered, multilingual training programs built for organizations that
-              need to act fast — Fintech, Healthcare, Manufacturing, Oil & Gas, Education, and Enterprise.
+              Strengthen your organization with Business Continuity Management training that prepares your workforce to handle disruptions, minimize risks, and respond effectively to crisis situations.
             </p>
             
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 mb-12">
@@ -137,7 +161,10 @@ export const Home: React.FC = () => {
                 Resilience Through <br className="hidden md:block" /> Intelligent Preparedness
               </h2>
               <p className="text-lg text-brand-text-muted leading-relaxed max-w-xl">
-                In the GCC’s hyper-connected economy, resilience is no longer reactive—it is engineered. The GCC BCP platform enables organizations to anticipate disruptions, strengthen continuity frameworks, and ensure operational stability at scale.
+                In the GCC’s hyper-connected economy, resilience is no longer reactive—it is 
+                engineered through <strong className="text-brand-gold">Business Continuity Management</strong>. The GCC BCP platform enables 
+                organizations to anticipate disruptions, strengthen continuity frameworks, 
+                and ensure operational stability at scale while enhancing <span className="italic">crisis preparedness</span>
               </p>
             </motion.div>
 
@@ -154,7 +181,9 @@ export const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">Operational Continuity, Assured</h3>
                 <p className="text-black leading-relaxed text-sm md:text-base">
-                  Minimize downtime with <span className="font-bold text-brand-navy">AI-driven preparedness</span> and real-time response frameworks.
+                 Minimize downtime with AI-driven <strong>Business Continuity Management</strong> 
+                 and real-time response frameworks designed to handle disruptions and 
+                 support effective <span className="italic">crisis response</span>.
                 </p>
               </motion.div>
 
@@ -170,7 +199,9 @@ export const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">Proactive Risk Intelligence</h3>
                 <p className="text-black leading-relaxed text-sm md:text-base">
-                  Detect risks early with predictive insights and adaptive learning for stronger readiness.
+                  Detect risks early with predictive insights and 
+                  adaptive learning that strengthen <strong>business continuity planning</strong> 
+                  and improve <span className="italic">crisis management readiness</span>.
                 </p>
               </motion.div>
             </div>
@@ -254,7 +285,7 @@ export const Home: React.FC = () => {
             >
               <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/5">
                 <Image
-                  src="/vulnerability.png"
+                  src="/3stepss.jpg"
                   alt="Modern Building Vulnerability"
                   fill
                   className="object-cover grayscale brightness-75 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
@@ -301,7 +332,7 @@ export const Home: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">Compliance & Workplace Training</h3>
                     <p className="text-brand-text-secondary leading-relaxed text-base md:text-lg opacity-80 group-hover:opacity-100 transition-opacity">
-                      War-risk clauses · Force-majeure · Regulatory updates
+                      War-risk clauses, force majeure, and regulatory updates integrated with  <strong className="text-brand-gold"> Business Continuity Management </strong> frameworks to ensure organizations remain compliant and prepared for <span className="italic"> crisis situations.</span>
                     </p>
                   </div>
                 </div>
@@ -314,7 +345,7 @@ export const Home: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">2–3 Week Delivery</h3>
                     <p className="text-brand-text-secondary leading-relaxed text-base md:text-lg opacity-80 group-hover:opacity-100 transition-opacity">
-                      AI-powered production · Fully operational teams
+                      AI-powered production and fully operational teams delivering rapid deployment of <strong className="text-brand-gold">business continuity and crisis management training</strong> programs for immediate <span className="italic"> workforce readiness.</span>
                     </p>
                   </div>
                 </div>
@@ -326,7 +357,7 @@ export const Home: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">White-label ready</h3>
                     <p className="text-brand-text-secondary leading-relaxed text-base md:text-lg opacity-80 group-hover:opacity-100 transition-opacity">
-                     Co-branding available · Custom LMS deployment
+                     Co-branding and custom LMS deployment designed to support <strong className="text-brand-gold">Business Continuity Management training</strong> and scalable <span  className="italic">crisis preparedness </span>programs across organizations.
                     </p>
                   </div>
                 </div>
@@ -351,10 +382,10 @@ export const Home: React.FC = () => {
             className="flex flex-col items-center text-center"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
-              Secure Your Future Today
+              Strengthen Your Business Continuity Today
             </h2>
             <p className="text-lg md:text-xl text-brand-text-secondary max-w-2xl mb-12 leading-relaxed opacity-90">
-              Evaluate your resilience, identify gaps, and take control of your business continuity.
+              Evaluate your resilience, identify gaps, and take control with structured <strong className="text-brand-gold">Business Continuity Management</strong> strategies designed for <span className="italic"> crisis readiness.</span>
             </p>
 
             <button 
@@ -366,7 +397,7 @@ export const Home: React.FC = () => {
 
             <div className="mt-16 pt-8 border-t border-white/10 w-full max-w-md">
               <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-white/40 uppercase">
-                ESTIMATED TIME: 12 MINUTES | CONFIDENTIAL & SECURE
+                Takes less than 12 minutes • Your responses remain strictly confidential
               </span>
             </div>
           </motion.div>
