@@ -17,6 +17,7 @@ export const Assessment: React.FC = () => {
 
   // Section transition logic
   const SECTIONS = ['Leadership', 'Communication', 'Operations', 'Workforce', 'Training'];
+  const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V'];
   const currentSectionIndex = Math.floor(questionIndex / 3);
   const isLastInSection = (questionIndex + 1) % 3 === 0;
   const isLastQuestion = questionIndex === QUESTIONS.length - 1;
@@ -35,7 +36,7 @@ export const Assessment: React.FC = () => {
   if (isLastQuestion) {
     buttonLabel = 'Finish Assessment';
   } else if (isLastInSection && nextSection) {
-    buttonLabel = `Continue to ${nextSection}`;
+    buttonLabel = `Continue to Section ${ROMAN_NUMERALS[currentSectionIndex + 1]}: ${nextSection}`;
   } else {
     buttonLabel = 'Next';
   }
@@ -47,7 +48,7 @@ export const Assessment: React.FC = () => {
         <div className="flex justify-between items-end mb-2">
           <div>
             <span className="text-brand-gold font-bold uppercase tracking-widest text-[10px]">
-              Section: {question.section}
+              Section {ROMAN_NUMERALS[currentSectionIndex]}: {question.section}
             </span>
             <h4 className="text-sm font-bold">Progress</h4>
           </div>
@@ -78,7 +79,7 @@ export const Assessment: React.FC = () => {
               <div className="h-8 w-8 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold mb-4">
                 <Activity size={16} />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-6 leading-tight">{question.text}</h3>
+              <h3 className="text-xl md:text-2xl font-bold mb-6 leading-tight">Q{questionIndex + 1}. {question.text}</h3>
 
               <div className="grid grid-cols-1 gap-3">
                 {[
