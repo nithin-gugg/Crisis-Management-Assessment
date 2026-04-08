@@ -161,10 +161,12 @@ export const Home: React.FC = () => {
                 Resilience Through <br className="hidden md:block" /> Intelligent Preparedness
               </h2>
               <p className="text-lg text-brand-text-muted leading-relaxed max-w-xl">
-                In the GCC’s hyper-connected economy, resilience is no longer reactive—it is 
-                engineered through <strong className="text-brand-gold">Business Continuity Management</strong>. The GCC BCP platform enables 
-                organizations to anticipate disruptions, strengthen continuity frameworks, 
-                and ensure operational stability at scale while enhancing <span className="italic">crisis preparedness</span>
+                In a hyper-connected business environment, 
+                resilience is no longer reactive—it is engineered 
+                through <strong className="text-brand-gold">Business Continuity Management</strong>. 
+                The BCP platform enables organizations to anticipate disruptions,
+                 strengthen continuity frameworks, and ensure operational stability at 
+                 scale while enhancing <span className="italic">crisis preparedness</span>.
               </p>
             </motion.div>
 
