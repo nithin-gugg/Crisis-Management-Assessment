@@ -181,9 +181,7 @@ export const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">Operational Continuity, Assured</h3>
                 <p className="text-black leading-relaxed text-sm md:text-base">
-                 Minimize downtime with AI-driven <strong>Business Continuity Management</strong> 
-                 and real-time response frameworks designed to handle disruptions and 
-                 support effective <span className="italic">crisis response</span>.
+                 Minimize downtime with AI-driven <strong>Business Continuity Management</strong> and real-time response frameworks designed to handle disruptions and support effective <span className="italic">crisis response</span>.
                 </p>
               </motion.div>
 
@@ -199,9 +197,7 @@ export const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">Proactive Risk Intelligence</h3>
                 <p className="text-black leading-relaxed text-sm md:text-base">
-                  Detect risks early with predictive insights and 
-                  adaptive learning that strengthen <strong>business continuity planning</strong> 
-                  and improve <span className="italic">crisis management readiness</span>.
+                  Detect risks early with predictive insights and adaptive learning that strengthen <strong>business continuity planning</strong> and improve <span className="italic">crisis management readiness</span>.
                 </p>
               </motion.div>
             </div>
