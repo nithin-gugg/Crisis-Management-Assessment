@@ -8,17 +8,22 @@ export function calculateResults(answers: Answer[]): AssessmentResults {
   if (totalScore >= 24) level = 'High';
   else if (totalScore >= 15) level = 'Moderate';
 
-  // Identify weak sections
-  const sectionScores: Record<string, number[]> = {};
+  // Identify weak sections and aggregate scores
+  const sectionScoresArr: Record<string, number[]> = {};
   QUESTIONS.forEach((q) => {
     const answer = answers.find((a) => a.questionId === q.id);
-    if (!sectionScores[q.section]) sectionScores[q.section] = [];
-    if (answer) sectionScores[q.section].push(answer.score);
+    if (!sectionScoresArr[q.section]) sectionScoresArr[q.section] = [];
+    if (answer) sectionScoresArr[q.section].push(answer.score);
   });
 
-  const weakSections = Object.entries(sectionScores)
+  const weakSections = Object.entries(sectionScoresArr)
     .filter(([, scores]) => scores.some((s) => s === 0 || s === 1))
     .map(([section]) => section);
 
-  return { totalScore, level, weakSections };
+  const sectionScores: Record<string, number> = {};
+  for (const [section, scores] of Object.entries(sectionScoresArr)) {
+    sectionScores[section] = scores.reduce((sum, s) => sum + s, 0);
+  }
+
+  return { totalScore, level, weakSections, sectionScores };
 }

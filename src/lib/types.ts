@@ -15,6 +15,7 @@ export interface AssessmentResults {
   totalScore: number;
   level: 'High' | 'Moderate' | 'Low';
   weakSections: string[];
+  sectionScores: Record<string, number>;
 }
 
 export interface TrainingModule {

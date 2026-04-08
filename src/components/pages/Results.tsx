@@ -19,6 +19,10 @@ import {
 } from 'lucide-react';
 import { IframeModal } from '@/components/common/Modal';
 import Footer from '@/components/Footer';
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/radar-chart';
+import { Badge } from '@/components/ui/badge';
 
 export const Results: React.FC = () => {
   const { userData, getResults, resetAssessment, submissionStatus, submissionError, submitAssessment } = useAssessment();
@@ -133,22 +137,70 @@ export const Results: React.FC = () => {
           </p>
         </div>
 
-        {/* Score + Weak Areas */}
+        {/* Score + Radar + Weak Areas */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          <div className="card-premium lg:col-span-1 flex flex-col items-center justify-center text-center p-10">
-            <span className="text-brand-text-muted text-xs font-bold uppercase tracking-widest mb-2">Total Score</span>
-            <div className="text-7xl font-black text-brand-gold mb-2">{results.totalScore}</div>
-            <span className="text-brand-text-muted">out of 30 points</span>
-            <div className="w-full h-1 bg-brand-navy mt-8 rounded-full overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${(results.totalScore / 30) * 100}%` }}
-                className={`h-full ${config.color.replace('text', 'bg')}`}
-              />
+          <div className="lg:col-span-1 flex flex-col gap-8">
+            <div className="card-premium flex flex-col items-center justify-center text-center p-10 h-full">
+              <span className="text-brand-text-muted text-xs font-bold uppercase tracking-widest mb-2">Total Score</span>
+              <div className="text-7xl font-black text-brand-gold mb-2">{results.totalScore}</div>
+              <span className="text-brand-text-muted">out of 30 points</span>
+              <div className="w-full h-1 bg-brand-navy mt-8 rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(results.totalScore / 30) * 100}%` }}
+                  className={`h-full ${config.color.replace('text', 'bg')}`}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="card-premium lg:col-span-2">
+          <div className="lg:col-span-2 flex flex-col h-full items-stretch justify-stretch">
+            <Card className="card-premium border-0 !p-6 flex-grow bg-brand-navy-light/40 shadow-none flex flex-col">
+              <CardHeader className="items-center pb-0 pt-0 px-0 relative z-10">
+                <CardTitle className="text-xl font-bold flex items-center">
+                  Section Performance
+                  <Badge
+                    variant="outline"
+                    className="text-brand-gold bg-brand-gold/10 border-brand-gold/20 ml-2"
+                  >
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    <span>Score Breakdown</span>
+                  </Badge>
+                </CardTitle>
+                <CardDescription className="text-brand-text-muted mt-2">
+                  Performance across the 5 domains
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pb-0 px-0 flex-grow flex items-center justify-center relative -mt-4">
+                <ChartContainer
+                  config={{ score: { label: "Score", color: "#facc15" } }}
+                  className="mx-auto w-full max-w-[400px] aspect-square"
+                >
+                  <RadarChart data={Object.entries(results.sectionScores || {}).map(([section, score]) => ({ section, score }))}>
+                    <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                    <PolarAngleAxis dataKey="section" tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 11 }} />
+                    <PolarGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                    <Radar
+                      dataKey="score"
+                      fill="var(--color-score)"
+                      fillOpacity={0.2}
+                      stroke="var(--color-score)"
+                      strokeWidth={2}
+                      filter="url(#stroke-line-glow)"
+                    />
+                    <defs>
+                      <filter id="stroke-line-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                    </defs>
+                  </RadarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="card-premium lg:col-span-3">
             <div className="flex items-center gap-3 mb-6">
               <AlertCircle className="text-brand-gold" />
               <h3 className="text-xl font-bold">Key Areas to Improve</h3>
