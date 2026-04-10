@@ -34,6 +34,7 @@ function checkRateLimit(ip: string): boolean {
 async function sendEmail(params: {
   to: string;
   name: string;
+  level: string;
   pdfBuffer: Buffer;
 }): Promise<void> {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM } = process.env;
@@ -51,26 +52,45 @@ async function sendEmail(params: {
     to: params.to,
     subject: 'Your Workforce Resilience Score',
     html: `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e;">
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e;line-height:1.6;">
         <div style="background:#021940;padding:30px;border-radius:8px 8px 0 0;text-align:center;">
           <img src="cid:logo" alt="Maple Learning Solutions" style="width:140px; margin-bottom:16px;" />
-          <h1 style="color:#d7b55b;margin:0;font-size:22px;">Workforce Resilience Assessment</h1>
-          <p style="color:#cbd5e1;margin:8px 0 0;font-size:20px;">Maple Learning Solutions</p>
+          <h1 style="color:#d7b55b;margin:0;font-size:22px;">Maple Crisis Readiness Assessment</h1>
+          <p style="color:#cbd5e1;margin:8px 0 0;font-size:18px;">Maple Learning Solutions</p>
         </div>
-        <div style="background:#f8fafc;padding:30px;">
+        <div style="background:#f8fafc;padding:30px;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;">
           <p style="font-size:16px;margin-top:0;">Hi <strong>${params.name}</strong>,</p>
-          <p>Thank you for completing the Workforce Resilience Assessment.</p>
-          <p>Please find your detailed report attached. It includes:</p>
-          <ul>
-            <li>Your overall readiness score</li>
-            <li>Key areas for improvement</li>
-            <li>Recommended training modules</li>
-          </ul>
-          <p>Our team of GCC workforce resilience experts is available to help you build a customized training roadmap.</p>
+          <p>Thank you for completing the Maple Crisis Readiness Assessment — we hope it was a valuable exercise for your organisation.</p>
+          
+          <p>Based on your responses, your organisation's current readiness level is:</p>
+          
+          <div style="background:#021940;color:#d7b55b;padding:20px;border-radius:12px;text-align:center;margin:25px 0;border:2px solid #d7b55b;">
+            <span style="font-size:24px;vertical-align:middle;">🏅</span>
+            <span style="font-size:18px;font-weight:bold;letter-spacing:1px;margin-left:10px;text-transform:uppercase;">READINESS LEVEL — ${params.level}</span>
+          </div>
+
+          <p>This reflects a solid foundation, and there is a clear, structured path to strengthening your organisation's crisis preparedness across your teams.</p>
+          
+          <p>Based on this result, we recommend the following next steps:</p>
+          
+          <ol style="padding-left:20px;">
+            <li style="margin-bottom:12px;"><strong>Schedule a 30-minute results walkthrough</strong> — we'll take you through your scores by category and highlight where focused training will have the most impact.</li>
+            <li style="margin-bottom:12px;"><strong>Explore our GCC Crisis Management Training Suite</strong> — 28 off-the-shelf courses across Business Continuity, Safety & Security, Mental Health, Remote Operations, and Healthcare Emergency Services, available in Arabic and English.</li>
+            <li style="margin-bottom:12px;"><strong>Start with a targeted pilot</strong> — we can deploy a curated selection of courses aligned to your readiness level at no cost for 30 days, so your team can experience the content before any commitment.</li>
+          </ol>
+
+          <p style="margin-top:25px;">We'd love to be your partner on this journey. Would you be available for a short call this week?</p>
+          
           <a href="https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae" 
-             style="display:inline-block;background:#d7b55b;color:#021940;font-weight:bold;padding:12px 24px;border-radius:8px;text-decoration:none;margin-top:10px;">
+             style="display:inline-block;background:#d7b55b;color:#021940;font-weight:bold;padding:12px 24px;border-radius:8px;text-decoration:none;margin-top:15px;margin-bottom:10px;">
             Book a Consultation
           </a>
+          
+          <div style="margin-top:30px;padding-top:20px;border-top:1px solid #e2e8f0;">
+            <p style="margin:0;font-weight:bold;color:#021940;">Warm regards,</p>
+            <p style="margin:5px 0 0;font-weight:bold;color:#d7b55b;">Maple Learning Solutions</p>
+            <p style="margin:5px 0 0;font-size:14px;color:#64748b;">+ 91 6303 646670 | <a href="https://www.maplelearningsolutions.com" style="color:#64748b;text-decoration:none;">www.maplelearningsolutions.com</a></p>
+          </div>
         </div>
         <div style="background:#021940;padding:16px;border-radius:0 0 8px 8px;text-align:center;">
           <p style="color:#94a3b8;font-size:11px;margin:0;">© Maple Learning Solutions | www.maplelearningsolutions.com</p>
@@ -178,7 +198,7 @@ export async function POST(req: NextRequest) {
 
     // 7. Fire Integrations in Parallel
     const results = await Promise.allSettled([
-      sendEmail({ to: email, name, pdfBuffer }),
+      sendEmail({ to: email, name, level, pdfBuffer }),
       sendToGoogleSheets({ name, email, phone, score, level, weakAreas }),
     ]);
 
