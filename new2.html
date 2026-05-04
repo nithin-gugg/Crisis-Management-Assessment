@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Continuity | Enterprise Resilience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-highest": "#353534",
+                    "secondary-fixed-dim": "#d1bcff",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "primary-container": "#0044ff",
+                    "outline-variant": "#434657",
+                    "surface-variant": "#353534",
+                    "on-tertiary-container": "#dad9d9",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary": "#3c0090",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-surface-variant": "#c4c5da",
+                    "surface-container": "#201f1f",
+                    "surface": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#ddcdff",
+                    "on-tertiary": "#2f3131",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#d2d7ff",
+                    "secondary-container": "#7000ff",
+                    "primary-fixed-dim": "#b9c3ff",
+                    "error": "#ffb4ab",
+                    "background": "#131313",
+                    "on-primary-fixed": "#001158",
+                    "secondary-fixed": "#e9ddff",
+                    "outline": "#8e8fa3",
+                    "on-primary-fixed-variant": "#0032c3",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "surface-tint": "#b9c3ff",
+                    "inverse-on-surface": "#313030",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#23005b",
+                    "tertiary-container": "#5e5f5f",
+                    "tertiary": "#c7c6c6",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-bright": "#3a3939",
+                    "on-background": "#e5e2e1",
+                    "primary": "#b9c3ff",
+                    "on-secondary-fixed-variant": "#5700c9",
+                    "secondary": "#d1bcff",
+                    "tertiary-fixed": "#e3e2e2",
+                    "on-surface": "#e5e2e1",
+                    "inverse-primary": "#0044fe",
+                    "primary-fixed": "#dee1ff",
+                    "on-error-container": "#ffdad6",
+                    "on-primary": "#00218c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xxl": "4rem",
+                    "lg": "1.5rem",
+                    "xl": "2.5rem",
+                    "sm": "0.5rem",
+                    "margin": "2rem",
+                    "md": "1rem",
+                    "gutter": "1.5rem",
+                    "xs": "0.25rem"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "label": ["Inter"],
+                    "h3": ["Inter"],
+                    "code": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "code": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(18, 18, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glow-blue {
+            filter: drop-shadow(0 0 15px rgba(0, 68, 255, 0.3));
+        }
+        .glow-purple {
+            filter: drop-shadow(0 0 15px rgba(112, 0, 255, 0.3));
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .connector-path {
+            stroke-dasharray: 10;
+            animation: dash 30s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-zinc-950/70 backdrop-blur-lg border-b border-white/10 shadow-2xl shadow-blue-500/10">
+<div class="flex items-center justify-between px-8 py-4 max-w-screen-2xl mx-auto font-inter antialiased tracking-tight">
+<div class="text-xl font-bold tracking-tighter text-zinc-50 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+                Continuity
+            </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-blue-500 font-semibold transition-all duration-300" href="#">Solutions</a>
+<a class="text-zinc-400 font-medium hover:text-zinc-100 transition-all duration-300" href="#">Capabilities</a>
+<a class="text-zinc-400 font-medium hover:text-zinc-100 transition-all duration-300" href="#">Readiness</a>
+<a class="text-zinc-400 font-medium hover:text-zinc-100 transition-all duration-300" href="#">AI Engine</a>
+<a class="text-zinc-400 font-medium hover:text-zinc-100 transition-all duration-300" href="#">Network</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-zinc-400 font-medium hover:text-zinc-100 transition-all duration-200 active:scale-95">Login</button>
+<button class="bg-primary-container text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 active:scale-95 shadow-lg shadow-blue-500/20">Get Started</button>
+</div>
+</div>
+</header>
+<main class="overflow-hidden">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center px-8 max-w-screen-2xl mx-auto py-xxl">
+<div class="absolute inset-0 z-0 overflow-hidden opacity-30">
+<svg class="w-full h-full" viewbox="0 0 1000 1000">
+<circle cx="500" cy="500" fill="none" r="300" stroke="url(#blue-grad)" stroke-width="0.5"></circle>
+<path class="connector-path" d="M100 500 Q 500 100 900 500" fill="none" stroke="rgba(0,68,255,0.2)"></path>
+<path class="connector-path" d="M100 800 Q 500 900 900 200" fill="none" stroke="rgba(112,0,255,0.2)"></path>
+<defs>
+<lineargradient id="blue-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color: #0044ff; stop-opacity: 0.1"></stop>
+<stop offset="100%" style="stop-color: #7000ff; stop-opacity: 0.1"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="lg:col-span-6 space-y-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 glass-card rounded-full border-blue-500/30">
+<span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+<span class="text-label text-blue-400 uppercase">Resilience Intelligence v4.0</span>
+</div>
+<h1 class="font-h1 text-h1 text-white max-w-xl leading-tight">
+                        Real-time <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary-container">Enterprise Continuity</span> for the modern age.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        Navigate systemic complexity with AI-driven readiness scoring, automated response networks, and continuous risk monitoring.
+                    </p>
+<div class="flex items-center gap-6 pt-md">
+<button class="bg-primary-container text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl shadow-blue-500/30 hover:scale-105 transition-transform">Deploy Hub</button>
+<button class="flex items-center gap-2 text-white font-medium group">
+<span class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</span>
+                            Watch Resilience Path
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-6 relative h-[600px] flex items-center justify-center">
+<!-- Central Hub -->
+<div class="relative z-20 w-64 h-64 glass-card rounded-3xl flex flex-col items-center justify-center border-blue-500/20 shadow-2xl shadow-blue-500/10">
+<div class="text-primary-container text-6xl mb-2 glow-blue">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div class="font-h2 text-h2 text-white">98.4</div>
+<div class="text-label text-on-surface-variant">RESILIENCE HUB</div>
+</div>
+<!-- Floating Cards -->
+<div class="absolute top-10 right-0 w-48 p-lg glass-card rounded-2xl floating z-30 shadow-xl" style="animation-delay: -1s;">
+<div class="text-secondary text-sm font-label mb-2">READINESS SCORE</div>
+<div class="text-h3 text-white">A+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-4 overflow-hidden">
+<div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 w-[92%]"></div>
+</div>
+</div>
+<div class="absolute bottom-10 left-0 w-56 p-lg glass-card rounded-2xl floating z-30 shadow-xl" style="animation-delay: -3s;">
+<div class="flex justify-between items-center mb-3">
+<span class="text-label text-error">RISK INDICATOR</span>
+<span class="material-symbols-outlined text-error text-md">warning</span>
+</div>
+<div class="space-y-2">
+<div class="h-2 bg-error/20 rounded-full w-full"></div>
+<div class="h-2 bg-error/20 rounded-full w-3/4"></div>
+<div class="h-2 bg-error/40 rounded-full w-1/2"></div>
+</div>
+<div class="mt-4 text-white font-code text-xs">Low Volatility Detected</div>
+</div>
+<!-- SVG Connectors -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 15;">
+<line class="connector-path" stroke="rgba(0,68,255,0.3)" stroke-width="2" x1="75%" x2="55%" y1="20%" y2="40%"></line>
+<line class="connector-path" stroke="rgba(112,0,255,0.3)" stroke-width="2" x1="25%" x2="45%" y1="80%" y2="60%"></line>
+</svg>
+</div>
+</div>
+</section>
+<!-- Capabilities (Fluid Grid) -->
+<section class="py-xxl px-8 max-w-screen-2xl mx-auto relative">
+<div class="text-center mb-xl">
+<h2 class="font-h2 text-h2 text-white mb-sm">Integrated Resilience Capabilities</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Dynamic data streams flowing between your most critical operational layers.</p>
+</div>
+<div class="relative h-[800px] md:h-[600px]">
+<!-- Fluidic Cards -->
+<div class="absolute top-0 left-[10%] w-full max-w-sm glass-card p-xl rounded-3xl hover:-translate-y-2 transition-transform duration-500 group shadow-lg">
+<span class="material-symbols-outlined text-primary-container text-4xl mb-md">analytics</span>
+<h3 class="font-h3 text-h3 text-white mb-sm">Operational Continuity</h3>
+<p class="text-body-sm text-on-surface-variant">End-to-end mapping of business dependencies with automated failover logic across all cloud and physical infrastructure.</p>
+</div>
+<div class="absolute top-[20%] right-[10%] w-full max-w-sm glass-card p-xl rounded-3xl hover:-translate-y-2 transition-transform duration-500 z-10 shadow-xl border-white/10">
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center glow-purple">
+<span class="material-symbols-outlined text-white">bolt</span>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-md">psychology</span>
+<h3 class="font-h3 text-h3 text-white mb-sm">Risk Intelligence</h3>
+<p class="text-body-sm text-on-surface-variant">Real-time threat vectors processed through our AI engine to predict systemic failures before they manifest.</p>
+</div>
+<div class="absolute bottom-0 left-[30%] w-full max-w-sm glass-card p-xl rounded-3xl hover:-translate-y-2 transition-transform duration-500 shadow-lg">
+<span class="material-symbols-outlined text-error text-4xl mb-md">emergency_share</span>
+<h3 class="font-h3 text-h3 text-white mb-sm">Crisis Response</h3>
+<p class="text-body-sm text-on-surface-variant">Coordinated playbook execution that unites siloed departments into a single, high-performance response unit.</p>
+</div>
+<!-- Animated Arrows SVG -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-40">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="0" refy="3.5">
+<polygon fill="rgba(0,68,255,0.5)" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<path class="connector-path" d="M350 150 Q 600 50 700 200" fill="none" marker-end="url(#arrowhead)" stroke="rgba(0,68,255,0.5)" stroke-width="2"></path>
+<path class="connector-path" d="M700 350 Q 500 500 450 550" fill="none" marker-end="url(#arrowhead)" stroke="rgba(112,0,255,0.5)" stroke-width="2"></path>
+</svg>
+</div>
+</section>
+<!-- Readiness Tracks (6-card interactive) -->
+<section class="py-xxl bg-surface-container-lowest/50 border-y border-white/5">
+<div class="px-8 max-w-screen-2xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end gap-md mb-xl">
+<div>
+<span class="text-label text-blue-500 mb-2 block">TRACKING PERFORMANCE</span>
+<h2 class="font-h2 text-h2 text-white">Active Readiness Tracks</h2>
+</div>
+<button class="text-primary hover:underline underline-offset-4 flex items-center gap-1 font-medium">
+                        View All Protocols <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Track Cards -->
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-blue-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-blue-500/10 text-blue-500">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-001</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Data Integrity Hub</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Validating cross-regional synchronization and ledger immutability.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-blue-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-blue-500">arrow_forward</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-purple-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-purple-500/10 text-purple-500">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-002</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Threat Surface Audit</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Continuous scanning for perimeter vulnerabilities and zero-day exposure.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-purple-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-purple-500">arrow_forward</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-emerald-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-500">
+<span class="material-symbols-outlined">share_location</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-003</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Supply Chain Vitals</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Tracking third-party uptime and critical vendor dependency health.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-emerald-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-emerald-500">arrow_forward</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-blue-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-blue-500/10 text-blue-500">
+<span class="material-symbols-outlined">router</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-004</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Network Resilience</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Latency optimization and multi-cloud routing redundancy checks.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-blue-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-blue-500">arrow_forward</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-orange-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-orange-500/10 text-orange-500">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-005</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Personnel Availability</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Mapping key-person risk and global emergency response contact chains.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-orange-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-orange-500">arrow_forward</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl group cursor-pointer hover:border-blue-500/50 transition-all duration-300">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 rounded-xl bg-blue-500/10 text-blue-500">
+<span class="material-symbols-outlined">settings_suggest</span>
+</div>
+<span class="text-label text-on-surface-variant font-code">RT-006</span>
+</div>
+<h4 class="text-body-lg font-bold text-white mb-2">Policy Automation</h4>
+<p class="text-body-sm text-on-surface-variant mb-xl">Translating governance frameworks into executable technical controls.</p>
+<div class="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-label text-blue-500">DEPLOY TRACK</span>
+<span class="material-symbols-outlined text-blue-500">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Delivery Engine -->
+<section class="py-xxl px-8 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div>
+<h2 class="font-h2 text-h2 text-white mb-lg">AI Continuity Engine</h2>
+<p class="text-body-lg text-on-surface-variant mb-xl">Our proprietary large action model (LAM) executes resilience strategies in milliseconds, bridging the gap between detection and mitigation.</p>
+<div class="space-y-lg relative">
+<!-- Step 1 -->
+<div class="flex gap-lg items-start relative z-10">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0 glow-blue">
+<span class="material-symbols-outlined text-white">search</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">Observation &amp; Ingestion</h4>
+<p class="text-body-sm text-on-surface-variant">AI nodes continuously sample billions of data points across your enterprise stack.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex gap-lg items-start relative z-10">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center shrink-0 glow-purple">
+<span class="material-symbols-outlined text-white">memory</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">Cognitive Analysis</h4>
+<p class="text-body-sm text-on-surface-variant">The Engine simulates 100,000+ failure scenarios to find the optimal resolution path.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex gap-lg items-start relative z-10">
+<div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white">play_circle</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">Automated Resolution</h4>
+<p class="text-body-sm text-on-surface-variant">Instant deployment of mitigation scripts and infrastructure re-routing.</p>
+</div>
+</div>
+<!-- Vertical Connectors -->
+<div class="absolute left-6 top-12 bottom-12 w-px bg-gradient-to-b from-primary-container via-secondary-container to-blue-500 z-0"></div>
+</div>
+</div>
+<div class="glass-card rounded-3xl p-xl aspect-square flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" data-alt="A macro close-up of a sophisticated neural network visualization featuring luminous strands of deep blue and violet light fiber-optics. The nodes pulse with a soft glow against a charcoal black void, creating a high-end enterprise technology aesthetic that feels both powerful and secure. The lighting is focused and dramatic, highlighting the intricate connectivity of the artificial intelligence engine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBopHfYeZlDyno-ZuombFaw6X-Jl7mAW8EAzDXSgOW0WEzxHGjjG4rswvWYZ7rMs25HWV6kt_SUqstSxF2kqSEdWUcK69hMdAEw0ba5Uu_oSDf5jyaJSigmEP3o1O1jPK4dUOCodK9Q8JlwC11YQUuQQAdwVUv3jZVqTZgIn-hfw3twAnNAkKBZy1pIwhjte0PHpmeMdm0YRcaSkFEx8YEDCPkBIDOVVlj3PKt93gYvnJkbIiQKdgx0OozYRWoZn2sxsNBLIEv6HBw"/>
+<div class="relative z-10 w-full h-full flex items-center justify-center">
+<div class="w-48 h-48 rounded-full border-2 border-primary-container/20 flex items-center justify-center">
+<div class="w-32 h-32 rounded-full border-4 border-primary-container/40 flex items-center justify-center animate-pulse">
+<div class="w-16 h-16 rounded-full bg-primary-container glow-blue flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">terminal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-xxl relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent"></div>
+<div class="px-8 max-w-4xl mx-auto text-center relative z-10">
+<h2 class="font-h1 text-h1 text-white mb-lg">Build a more <br/><span class="text-blue-500 italic">resilient</span> future today.</h2>
+<p class="text-body-lg text-on-surface-variant mb-xl">Join the global leaders who trust Continuity to safeguard their mission-critical operations.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-xl">
+<button class="bg-white text-zinc-950 px-10 py-5 rounded-2xl font-bold text-xl hover:bg-blue-50 transition-colors shadow-2xl">Deploy Continuity</button>
+<div class="glass-card p-lg rounded-2xl border-white/10 flex items-center gap-md">
+<div class="text-left">
+<div class="text-label text-on-surface-variant">YOUR READINESS</div>
+<div class="text-h3 text-white">94%</div>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-emerald-500/50 flex items-center justify-center text-emerald-500">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-950 border-t border-zinc-900 w-full pt-20 pb-10">
+<div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="text-lg font-bold text-zinc-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500">emergency_home</span>
+                    Continuity
+                </div>
+<p class="font-inter text-sm leading-relaxed text-zinc-500 max-w-xs text-center md:text-left">
+                    © 2024 Continuity Framework. High-trust enterprise resilience. Built for the world's most critical infrastructure.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-zinc-500 hover:text-blue-400 transition-colors duration-200" href="#">Documentation</a>
+<a class="text-zinc-500 hover:text-blue-400 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-zinc-500 hover:text-blue-400 transition-colors duration-200" href="#">Security Standards</a>
+<a class="text-zinc-500 hover:text-blue-400 transition-colors duration-200" href="#">API Reference</a>
+<a class="text-zinc-500 hover:text-blue-400 transition-colors duration-200" href="#">Status</a>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-zinc-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-xl">language</span>
+</div>
+<div class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-500 hover:text-white hover:border-zinc-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-xl">terminal</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
