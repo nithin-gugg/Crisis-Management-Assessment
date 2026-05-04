@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
+import { GoogleGenerativeAI, SchemaType, Schema } from '@google/generative-ai';
 
 // Initialize the SDK
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
@@ -58,7 +58,7 @@ Set "cta.show = true" ONLY when: user asks about solutions, implementation, cost
 - Confident, Helpful, Slightly consultative (like a risk advisor), Not overly salesy.
 `;
 
-const responseSchema = {
+const responseSchema: Schema = {
   type: SchemaType.OBJECT,
   properties: {
     text: { type: SchemaType.STRING },
