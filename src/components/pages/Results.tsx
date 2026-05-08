@@ -23,6 +23,7 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/radar-chart';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export const Results: React.FC = () => {
   const { userData, getResults, resetAssessment, submissionStatus, submissionError, submitAssessment } = useAssessment();
@@ -293,26 +294,29 @@ export const Results: React.FC = () => {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            <button
+            <Button
               onClick={handleDownloadReport}
               disabled={downloadLoading}
-              className="btn-secondary flex items-center justify-center gap-2 disabled:opacity-70"
+              variant="brandSecondary"
+              className="flex items-center justify-center gap-2"
             >
               {downloadLoading ? <Loader2 size={18} className="animate-spin" /> : <Download size={20} />}
               Download Report
-            </button>
-            <button
-              className="btn-primary flex items-center justify-center gap-2"
+            </Button>
+            <Button
+              variant="brandPrimary"
+              className="flex items-center justify-center gap-2"
               onClick={() => window.open('https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae', '_blank')}
             >
               <MessageSquare size={20} /> Book Consultation
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={resetAssessment}
+              variant="outline"
               className="p-4 rounded-xl border border-brand-text-muted/20 text-brand-text-muted hover:text-brand-text-primary hover:border-brand-text-primary transition-all flex items-center justify-center gap-2"
             >
               <RefreshCcw size={18} /> Retake Assessment
-            </button>
+            </Button>
           </div>
 
           <div className="mt-12 pt-8 border-t border-brand-gold/5 flex flex-col md:flex-row items-center justify-center gap-8">

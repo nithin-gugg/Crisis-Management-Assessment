@@ -2,8 +2,10 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldAlert, Laptop, ShieldCheck, Heart, Activity, Landmark } from 'lucide-react';
+import { ShieldAlert, Laptop, ShieldCheck, Heart, Activity, Landmark, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { useAssessment } from '@/context/AssessmentContext';
+import { Button } from './button';
 
 const capabilitiesData = [
    {
@@ -69,6 +71,7 @@ const capabilitiesData = [
 ];
 
 export function StickyCapabilities() {
+   const { nextStep } = useAssessment();
    const [activeCard, setActiveCard] = useState(0);
    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -134,9 +137,14 @@ export function StickyCapabilities() {
                            <div className="w-8 h-8 bg-[#F24E1E] rounded-full flex items-center justify-center text-white text-xs font-bold">F</div>
                            <div className="w-8 h-8 bg-[#00C473] rounded-full flex items-center justify-center text-white text-[10px] font-bold">S</div>
                         </div>
-                        <button className="text-white hover:text-blue-400 transition-colors text-sm font-semibold flex items-center gap-2">
-                           Discover all integrations &rarr;
-                        </button>
+                        <Button 
+                           onClick={nextStep}
+                           variant="brandSecondary"
+                           size="sm"
+                           className="flex items-center gap-2 h-auto py-2 px-4"
+                        >
+                           Discover all integrations <ArrowRight size={16} />
+                        </Button>
                      </div>
                   </div>
                ))}

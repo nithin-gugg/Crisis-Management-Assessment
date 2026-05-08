@@ -3,8 +3,7 @@
 import React from 'react';
 import { Header } from '@/components/common/Header';
 import Footer from '@/components/Footer';
-import { Search, PenTool, Activity, ShieldCheck, MapPin, Zap, ClipboardList, ChevronDown, Mic, Send } from 'lucide-react';
-import Image from 'next/image';
+import { Search, PenTool, Activity, ShieldCheck, ChevronDown, Zap } from 'lucide-react';
 import { WorldMap } from '@/components/ui/map';
 import { StickyCapabilities } from '@/components/ui/sticky-capabilities';
 import { StarsBackground } from '@/components/ui/stars';
@@ -12,8 +11,12 @@ import { TestimonialsSectionBasic } from '@/components/blocks/demo';
 import { LiveMetrics } from '@/components/ui/live-metrics';
 import { motion } from 'framer-motion';
 import { CopilotChat } from '@/components/ui/copilot-chat';
+import { useAssessment } from '@/context/AssessmentContext';
+import { Button } from '@/components/ui/button';
 
 export default function Home2() {
+    const { nextStep } = useAssessment();
+
     return (
         <StarsBackground className="min-h-screen flex flex-col text-white font-sans">
             <Header />
@@ -28,19 +31,28 @@ export default function Home2() {
                         <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
                             Total Business<br />
                             Resilience,<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00b4db] to-[#0083b0]">Strategically</span><br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8e2de2] to-[#4a00e0]">Managed.</span>
+                            <span className="text-transparent bg-clip-text bg-brand-gold">Strategically</span><br />
+                            <span className="text-transparent bg-clip-text bg-brand-gold">Managed.</span>
                         </h1>
                         <p className="text-gray-400 text-lg md:text-xl max-w-xl leading-relaxed">
                             The ultimate command center for modern enterprises. Anticipate, prepare, and manage disruptions before they become crises.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-                                INITIATE PLATFORM
-                            </button>
-                            <button className="bg-transparent border border-gray-600 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded transition-all flex items-center justify-center gap-2">
+                            <Button
+                                onClick={nextStep}
+                                size="lg"
+                                variant="brandPrimary"
+                                className="flex items-center justify-center gap-2 group"
+                            >
+                                Get Your Score Now <Zap size={18} className="group-hover:animate-pulse" />
+                            </Button>
+                            {/* <Button 
+                                variant="brandSecondary" 
+                                size="lg"
+                                className="flex items-center justify-center gap-2"
+                            >
                                 VIEW CAPABILITIES <ChevronDown size={18} />
-                            </button>
+                            </Button> */}
                         </div>
                     </div>
 
@@ -192,7 +204,7 @@ export default function Home2() {
                 <TestimonialsSectionBasic />
 
                 {/* HOW CAN I HELP */}
-                <CopilotChat />
+                <CopilotChat onStartAssessment={nextStep} />
 
             </main>
 

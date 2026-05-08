@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
+import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { User, ArrowRight, ShieldCheck, Loader2, ArrowLeft } from 'lucide-react';
 import { ConsentCheckbox } from '@/components/common/ConsentCheckbox';
@@ -111,10 +112,12 @@ export const UserForm: React.FC = () => {
               />
             </div>
 
-            <button
-              disabled={loading || !consentPrivacy || !captchaToken}
+            <Button
               type="submit"
-              className="w-full btn-primary mt-6 mb-2 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={loading || !consentPrivacy || !captchaToken}
+              variant="brandPrimary"
+              size="lg"
+              className="w-full mt-6 mb-2 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -125,7 +128,7 @@ export const UserForm: React.FC = () => {
                   Start Assessment <ArrowRight size={18} />
                 </>
               )}
-            </button>
+            </Button>
           </form>
 
           <p className="text-center text-[10px] text-brand-text-muted mt-4">

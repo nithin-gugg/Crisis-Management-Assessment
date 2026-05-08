@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAssessment } from '@/context/AssessmentContext';
+import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight, Loader2, Award } from 'lucide-react';
 
@@ -77,10 +78,12 @@ export const ScoreCheckForm: React.FC = () => {
               />
             </div>
 
-            <button
+            <Button
               disabled={loading}
               type="submit"
-              className="w-full btn-primary mt-6 mb-2 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              variant="brandPrimary"
+              size="lg"
+              className="w-full mt-6 mb-2 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -91,7 +94,7 @@ export const ScoreCheckForm: React.FC = () => {
                   Check My Score <ArrowRight size={18} />
                 </>
               )}
-            </button>
+            </Button>
           </form>
 
           <p className="text-center text-[10px] text-brand-text-muted mt-4">

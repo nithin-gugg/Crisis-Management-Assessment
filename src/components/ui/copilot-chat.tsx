@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Send, Bot, User, ArrowRight, Loader2, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Mic, Send, Bot, User, ArrowRight, Loader2, X, Star, Zap } from 'lucide-react';
+import { Button } from './button';
 
 type Message = {
     id: string;
@@ -13,13 +13,20 @@ type Message = {
     suggestions?: string[];
 };
 
-export function CopilotChat() {
-    const router = useRouter();
+interface CopilotChatProps {
+    onStartAssessment?: () => void;
+}
+
+export function CopilotChat({ onStartAssessment }: CopilotChatProps) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const handleStartAssessment = () => {
+        if (onStartAssessment) onStartAssessment();
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -100,25 +107,37 @@ export function CopilotChat() {
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">How can I help today?</h2>
                 <p className="text-gray-400 mb-10 text-center">Ask Sentinel's AI copilot to analyze risk or initiate a playbook.</p>
 
+                {onStartAssessment && (
+                    <Button
+                        onClick={handleStartAssessment}
+                        variant="brandPrimary"
+                        size="lg"
+                        className="mb-8 flex items-center gap-2 group"
+                    >
+                        Get Your Score Now <Zap size={18} className="group-hover:animate-pulse" />
+                    </Button>
+                )}
+
                 <div className="w-full bg-[#111827] border border-gray-700 rounded-2xl p-4 shadow-xl">
-                    <div className="bg-[#0b0f19] border border-gray-800 rounded-xl p-4 flex flex-col min-h-[120px]">
+                    <div className="bg-[#0b0f19] border border-gray-800 rounded-xl p-4 flex flex-col h-[100px]">
                         <textarea
                             className="w-full bg-transparent resize-none text-white outline-none placeholder-gray-500 flex-1 custom-scrollbar"
-                            placeholder={messages.length === 0 ? "Hi, I'm your AI assistant..." : "Continue chatting with Sentinel..."}
+                            placeholder={messages.length === 0 ? "Ask about BCP......" : "Continue chatting with Sentinel..."}
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
                             disabled={isLoading}
                         />
                         <div className="flex justify-between items-center mt-2">
-                            <button className="text-gray-400 hover:text-white transition"><Mic size={20} /></button>
-                            <button 
+                            <button className="text-gray-400 hover:text-white transition"><Star size={20} /></button>
+                            <Button 
                                 onClick={() => sendMessage(input)}
                                 disabled={!input.trim() || isLoading}
-                                className="bg-blue-600 disabled:bg-gray-700 disabled:text-gray-400 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors flex items-center justify-center"
+                                size="icon"
+                                className="bg-blue-600 hover:bg-blue-700 h-8 w-8"
                             >
-                                <Send size={16} />
-                            </button>
+                                <Send size={14} />
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -138,9 +157,14 @@ export function CopilotChat() {
                 )}
                 
                 {messages.length > 0 && !isOpen && (
-                    <button onClick={() => setIsOpen(true)} className="mt-6 text-blue-400 hover:text-blue-300 text-sm font-medium border border-blue-500/30 py-2 px-4 rounded-full transition bg-blue-500/5">
+                    <Button 
+                        onClick={() => setIsOpen(true)} 
+                        variant="brandSecondary"
+                        size="sm"
+                        className="mt-6"
+                    >
                         Resume Chat History
-                    </button>
+                    </Button>
                 )}
             </section>
 
@@ -187,12 +211,14 @@ export function CopilotChat() {
                             {msg.role === 'assistant' && (
                                 <div className="mt-3 ml-11 flex flex-col items-start gap-3 w-full">
                                     {msg.cta?.show && (
-                                        <button 
-                                            onClick={() => router.push(msg.cta!.url)}
-                                            className="bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm py-2 px-5 rounded-lg transition flex items-center gap-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                                        <Button 
+                                            onClick={handleStartAssessment}
+                                            variant="brandPrimary"
+                                            size="sm"
+                                            className="flex items-center gap-2"
                                         >
                                             {msg.cta.label} <ArrowRight size={16} />
-                                        </button>
+                                        </Button>
                                     )}
                                     {msg.suggestions && msg.suggestions.length > 0 && idx === messages.length - 1 && (
                                         <div className="flex flex-wrap gap-2 mt-1">

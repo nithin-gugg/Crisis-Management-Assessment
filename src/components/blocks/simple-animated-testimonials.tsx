@@ -136,7 +136,7 @@ export function TestimonialsSection({
             </div>
 
             {/* Testimonial cards */}
-            <div className="relative h-[320px] md:h-[280px]">
+            <div className="relative h-[420px] md:h-[280px]">
               {testimonials.map((testimonial, index) => (
                 <Card
                   key={testimonial.id}
@@ -172,9 +172,7 @@ export function TestimonialsSection({
 
                     <p className="flex-1 italic text-base/relaxed text-gray-300">"{testimonial.content}"</p>
 
-                    {showVerifiedBadge && (
-                      <div className="mt-4 text-xs text-right text-gray-500">Verified Customer</div>
-                    )}
+                    
                   </CardContent>
                 </Card>
               ))}

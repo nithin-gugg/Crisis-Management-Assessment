@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Zap, MessageSquare } from 'lucide-react';
 import { useAssessment } from '@/context/AssessmentContext';
+import { Button } from '@/components/ui/button';
 
 export const Header: React.FC = () => {
   const { currentStep, nextStep, isComplete } = useAssessment();
@@ -32,17 +33,28 @@ export const Header: React.FC = () => {
 
         <nav className="flex items-center gap-6">
           {currentStep === 0 ? (
-            <button onClick={nextStep} className="btn-primary flex items-center gap-2 group text-sm py-2 px-4 shadow-none">
-               Get Your Score Now <Zap size={16} className="group-hover:animate-pulse" />
-            </button>
-          ) : isComplete ? (
-            <Link 
-              href="https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae" 
-              target="_blank"
-              className="btn-primary flex items-center gap-2 text-sm py-2 px-4 shadow-none"
+            <Button 
+                onClick={nextStep} 
+                variant="brandPrimary" 
+                size="sm" 
+                className="flex items-center gap-2 group shadow-none"
             >
-              Contact Us <MessageSquare size={16} />
-            </Link>
+               Get Your Score Now <Zap size={16} className="group-hover:animate-pulse" />
+            </Button>
+          ) : isComplete ? (
+            <Button 
+              variant="brandPrimary" 
+              size="sm" 
+              className="flex items-center gap-2 shadow-none"
+              asChild
+            >
+              <Link 
+                href="https://www.maplelearningsolutions.com/elearning-solutions-in-uae#cta-ae" 
+                target="_blank"
+              >
+                Contact Us <MessageSquare size={16} />
+              </Link>
+            </Button>
           ) : null}
         </nav>
       </div>
