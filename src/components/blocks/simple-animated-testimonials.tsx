@@ -136,15 +136,15 @@ export function TestimonialsSection({
             </div>
 
             {/* Testimonial cards */}
-            <div className="relative h-[420px] md:h-[280px]">
+            <div className="grid grid-cols-1">
               {testimonials.map((testimonial, index) => (
                 <Card
                   key={testimonial.id}
                   className={cn(
-                    "absolute inset-0 transition-all duration-500 border bg-[#111827]/80 backdrop-blur-sm border-gray-800",
+                    "col-start-1 row-start-1 transition-all duration-500 border bg-[#111827]/80 backdrop-blur-sm border-gray-800 w-full",
                     index === activeIndex
-                      ? "opacity-100 translate-x-0 shadow-lg"
-                      : "opacity-0 translate-x-[100px] pointer-events-none",
+                      ? "opacity-100 translate-x-0 shadow-lg z-10"
+                      : "opacity-0 translate-x-[100px] pointer-events-none z-0",
                   )}
                 >
                   <CardContent className="p-6 md:p-8 h-full flex flex-col">
