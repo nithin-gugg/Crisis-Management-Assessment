@@ -85,32 +85,34 @@ const schemaData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
-  title: 'Business Continuity Management in UAE | Training & Solutions',
-description:
-  "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
-keywords:
-  'workforce resilience, resilience assessment, employee resilience, organizational resilience, business continuity, resilience training, eLearning',
+  title: {
+    default: 'Business Continuity Management in UAE | Training & Solutions',
+    template: '%s | Maple Learning Solutions',
+  },
+  description:
+    "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
+  keywords:
+    'workforce resilience, resilience assessment, employee resilience, organizational resilience, business continuity, resilience training, eLearning',
   authors: [{ name: 'Maple Learning Solutions' }],
 
   alternates: {
-    canonical: 'https://gccbcp.maplelearningsolutions.com/',
+    canonical: '/',
   },
 
   openGraph: {
-    title: 'Workforce Resilience Assessment | Maple Learning Solutions',
-description:
-  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
+    title: 'Business Continuity Management in UAE | Training & Solutions',
+    description:
+      "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
     type: 'website',
-    url: 'https://gccbcp.maplelearningsolutions.com/',
+    url: '/',
     siteName: 'Maple Learning Solutions',
     locale: 'en_US',
     images: [
       {
-        url: 'https://gccbcp.maplelearningsolutions.com/og-image.webp', // ✅ IMPORTANT
-        secureUrl: 'https://gccbcp.maplelearningsolutions.com/og-image.webp',
+        url: '/og-image.webp',
         width: 1200,
         height: 630,
-        alt: 'Workforce Resilience Assessment Thumbnail',
+        alt: 'Business Continuity Management Thumbnail',
         type: 'image/webp',
       },
     ],
@@ -118,10 +120,10 @@ description:
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Workforce Resilience Assessment | Maple Learning Solutions',
-description:
-  "Assess your organization's workforce resilience and preparedness with a personalized resilience readiness report.",
-    images: ['https://gccbcp.maplelearningsolutions.com/og-image.webp'], // ✅ IMPORTANT
+    title: 'Business Continuity Management in UAE | Training & Solutions',
+    description:
+      "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
+    images: ['/og-image.webp'],
   },
   
   robots: {
@@ -139,11 +141,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans`}>
         {/* ✅ JSON-LD Schema */}
-        <Script
-          id="schema-ld"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-          strategy="afterInteractive"
         />
         <AssessmentProvider>
           {children}
