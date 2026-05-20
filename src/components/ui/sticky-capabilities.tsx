@@ -12,6 +12,7 @@ const capabilitiesData = [
       tag: "[01] RESPONSE",
       title: "Business Continuity & Workforce Resilience Response",
       description: "Emergency protocols, evacuation procedures, and shelter-in-place training aligned with Business Continuity Management frameworks, enabling teams to respond effectively during crisis situations.",
+      capabilities: ["Workforce Resilience", "Emergency Preparedness", "Business Continuity Planning", "Evacuation Procedures", "Incident Response", "Certification Programs"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/bcc.webp" alt="Response" fill className="object-cover" />
@@ -22,6 +23,7 @@ const capabilitiesData = [
       tag: "[02] DIGITAL",
       title: "Remote Work & Digital Operations",
       description: "Digital workflows and virtual leadership training designed to support business continuity planning and maintain operational stability during disruptions and crisis scenarios.",
+      capabilities: ["Digital Workflows", "Virtual Leadership", "Remote Operations", "LMS Delivery", "Operational Stability", "Collaboration Readiness"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/remote.webp" alt="Digital Operations" fill className="object-cover" />
@@ -32,6 +34,7 @@ const capabilitiesData = [
       tag: "[03] SECURITY",
       title: "Safety & Security Awareness",
       description: "Comprehensive safety and cybersecurity training programs that strengthen crisis management preparedness and ensure workforce readiness against emerging threats.",
+      capabilities: ["Cybersecurity Awareness", "Threat Preparedness", "Compliance Frameworks", "Security Training", "Risk Mitigation", "Emergency Response"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/safety.webp" alt="Security" fill className="object-cover" />
@@ -42,6 +45,7 @@ const capabilitiesData = [
       tag: "[04] WELLBEING",
       title: "Mental Health & Workforce Resilience",
       description: "Stress management and resilience programs that support employees during disruptions, enhancing crisis response capability and overall business continuity readiness.",
+      capabilities: ["Workforce Wellbeing", "Stress Management", "Resilience Training", "Employee Support", "Leadership Readiness", "Recovery Preparedness"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/mental-health.webp" alt="Mental Health" fill className="object-cover" />
@@ -52,6 +56,7 @@ const capabilitiesData = [
       tag: "[05] HEALTHCARE",
       title: "Healthcare & Emergency Services",
       description: "Training for surge capacity, triage procedures, and compliance aligned with Business Continuity Management to ensure effective response during emergencies and crisis situations.",
+      capabilities: ["Emergency Triage", "Healthcare Preparedness", "Compliance Training", "Surge Capacity Planning", "Response Coordination", "Certification Programs"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/hospital.webp" alt="Healthcare" fill className="object-cover" />
@@ -62,6 +67,7 @@ const capabilitiesData = [
       tag: "[06] GOV & DEFENSE",
       title: "Government & Defense Upskilling",
       description: "Capability-building programs focused on operational readiness, supporting crisis management strategies and national-level business continuity preparedness.",
+      capabilities: ["Operational Readiness", "National Preparedness", "Defense Workforce Training", "Resilience Simulation", "Crisis Command Systems", "Compliance Frameworks"],
       image: (
          <div className="w-full h-full relative">
             <Image src="/thumbnails/govt.webp" alt="Gov and Defense" fill className="object-cover" />
@@ -128,22 +134,21 @@ export function StickyCapabilities() {
 
                      {/* Footer info (present in all cards) */}
                      <div className="mt-2 md:mt-4 pt-6 md:pt-8 border-t border-gray-800">
-                        <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4 md:mb-6">Connect your data</div>
+                        <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4 md:mb-6">Program Capabilities</div>
                         <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
-                           {/* Fake icons mimicking the image */}
-                           <div className="w-8 h-8 bg-[#2D8CFF] rounded-full flex items-center justify-center text-white text-xs font-bold">Z</div>
-                           <div className="w-8 h-8 bg-black border border-gray-700 rounded-full flex items-center justify-center text-white text-xs font-bold">N</div>
-                           <div className="w-8 h-8 bg-[#FF4F00] rounded-full flex items-center justify-center text-white text-[10px] font-bold">Zp</div>
-                           <div className="w-8 h-8 bg-[#F24E1E] rounded-full flex items-center justify-center text-white text-xs font-bold">F</div>
-                           <div className="w-8 h-8 bg-[#00C473] rounded-full flex items-center justify-center text-white text-[10px] font-bold">S</div>
+                           {card.capabilities?.map((capability, i) => (
+                              <div key={i} className="px-3 py-1.5 bg-gray-800/50 border border-gray-700 rounded-full flex items-center justify-center text-gray-300 text-xs font-medium">
+                                 {capability}
+                              </div>
+                           ))}
                         </div>
-                        <Button 
+                        <Button
                            onClick={nextStep}
                            variant="brandSecondary"
                            size="sm"
                            className="flex items-center gap-2 h-auto py-2 px-4"
                         >
-                           Discover all integrations <ArrowRight size={16} />
+                           Know Your Score <ArrowRight size={16} />
                         </Button>
                      </div>
                   </div>

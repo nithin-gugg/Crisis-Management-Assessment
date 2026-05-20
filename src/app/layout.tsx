@@ -86,11 +86,11 @@ const schemaData = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://gccbcp.maplelearningsolutions.com/'),
   title: {
-    default: 'Business Continuity Management in UAE | Training & Solutions',
+    default: 'GCC Business Continuity Planning Certification | Maple Learning',
     template: '%s | Maple Learning Solutions',
   },
   description:
-    "Build resilient organizations with business continuity management training in UAE. Prepare teams for crisis situations with structured programs.",
+    "Get certified in Business Continuity Planning for GCC markets. Professional BCP training courses by Maple Learning Solutions. Advance your career today.",
   keywords:
     'workforce resilience, resilience assessment, employee resilience, organizational resilience, business continuity, resilience training, eLearning',
   authors: [{ name: 'Maple Learning Solutions' }],
