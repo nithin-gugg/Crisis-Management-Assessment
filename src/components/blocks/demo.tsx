@@ -53,7 +53,13 @@ export function TestimonialsSectionBasic() {
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
   },
 ]}
-      trustedCompanies={["Cognizant", "Service Now", "Thomson Reuters", "Accenture", "Michelin"]}
+      trustedCompanies={[
+        "/companies/cognizant.png",
+        "/companies/servicenow.jpg",
+        "/companies/thomson.png",
+        "/companies/accenture.png",
+        "/companies/michelin.png"
+      ]}
       trustedCompaniesTitle="Trusted by innovative teams worldwide"
     />
   );

@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 import { CopilotChat } from '@/components/ui/copilot-chat';
 import { useAssessment } from '@/context/AssessmentContext';
 import { Button } from '@/components/ui/button';
-
+import Image from 'next/image';
 export default function Home2() {
     const { nextStep } = useAssessment();
 
@@ -23,110 +23,62 @@ export default function Home2() {
 
             <main className="flex-1 w-full flex flex-col items-center">
                 {/* HERO SECTION */}
-                <section className="w-full max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-12">
-                    <div className="flex-1 flex flex-col gap-6 relative z-10">
-                        <div className="inline-block px-3 py-1 border border-blue-500/30 bg-blue-500/10 rounded-full text-xs font-medium text-blue-400 w-max uppercase tracking-wider mb-2">
-                            Next-Generation Platform
+                <section className="relative w-full pt-3 md:py-38 flex flex-col items-center justify-center overflow-hidden border-b border-white/5 bg-[#020617] z-10">
+                    {/* Background Video */}
+                    <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover opacity-50"
+                        >
+                            <source src="/hero-video-bg.mp4" type="video/mp4" />
+                        </video>
+                        {/* Gradient overlays removed as per request */}
+                    </div>
+
+                    <div className="w-full max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-start text-left gap-6">
+                        <div className="inline-block px-4 py-1.5 border border-[#1d4ed8]/50 bg-[#1d4ed8]/10 rounded-full text-xs font-semibold text-[#60a5fa] w-max uppercase tracking-wider mb-2 shadow-[0_0_15px_rgba(29,78,216,0.2)]">
+                            NEXT-GENERATION PLATFORM
                         </div>
-                        <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
-                            Total Business<br />
-                            Resilience,<br />
-                            <span className="text-transparent bg-clip-text bg-brand-gold">Strategically</span><br />
-                            <span className="text-transparent bg-clip-text bg-brand-gold">Managed.</span>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight max-w-4xl drop-shadow-2xl text-white">
+                            Total Business Resilience,<br />
+                            <span className="text-[#E6B959] drop-shadow-md">Strategically Managed.</span>
                         </h1>
-                        <p className="text-gray-400 text-lg md:text-xl max-w-xl leading-relaxed">
-                            The ultimate command center for modern enterprises. Anticipate, prepare, and manage disruptions before they become crises.
+                        <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-lg mb-2">
+                            The ultimate command center for modern enterprises. Anticipate, prepare, <br className="hidden md:block" />
+                            and manage disruptions before they become crises.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 mt-4">
+
+                        {/* ISO Certificates */}
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-8 mt-2 mb-4">
+                            <div className="flex items-center gap-3">
+                                <Image src="/iso27001.png" alt="ISO 22301" width={48} height={48} className="object-contain" />
+                                <div className="flex flex-col">
+                                    <span className="text-white font-bold text-lg leading-tight">ISO 22301</span>
+                                    <span className="text-gray-400 text-xs">Business Continuity Management</span>
+                                </div>
+                            </div>
+                            <div className="hidden sm:block w-[1px] h-10 bg-gray-600/50"></div>
+                            <div className="flex items-center gap-3">
+                                <Image src="/iso22301.png" alt="ISO 27001" width={48} height={48} className="object-contain" />
+                                <div className="flex flex-col">
+                                    <span className="text-white font-bold text-lg leading-tight">ISO 27001</span>
+                                    <span className="text-gray-400 text-xs">Information Security Management</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-start">
                             <Button
                                 onClick={nextStep}
                                 size="lg"
-                                variant="brandPrimary"
-                                className="flex items-center justify-center gap-2 group"
+                                className="flex items-center justify-center gap-2 group bg-[#E6B959] hover:bg-[#d4a849] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(230,185,89,0.3)] hover:shadow-[0_0_30px_rgba(230,185,89,0.5)]"
                             >
-                                Get Your Score Now <Zap size={18} className="group-hover:animate-pulse" />
+                                Get Your Score Now <Zap size={18} className="fill-black group-hover:animate-pulse" />
                             </Button>
-                            {/* <Button 
-                                variant="brandSecondary" 
-                                size="lg"
-                                className="flex items-center justify-center gap-2"
-                            >
-                                VIEW CAPABILITIES <ChevronDown size={18} />
-                            </Button> */}
                         </div>
-                    </div>
-
-                    <div className="flex-1 relative w-full h-[400px] lg:h-[500px]">
-                        {/* Mockup visualization since we don't have the exact image */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#1a233a] to-[#0f172a] border border-gray-700/50 rounded-xl shadow-2xl overflow-hidden flex flex-col">
-                            <div className="h-8 border-b border-gray-700/50 flex items-center px-4 gap-2 bg-[#1e293b]/50">
-                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div className="p-6 flex-1 flex flex-col gap-6">
-                                <div className="flex gap-4">
-                                    <div className="flex-1 bg-black/30 rounded-lg border border-gray-700/50 p-4">
-                                        <div className="text-sm text-gray-400">Current Risk</div>
-                                        <div className="text-2xl font-bold text-green-400">0.024 <span className="text-sm font-normal text-gray-500">avg</span></div>
-                                    </div>
-                                    <div className="flex-1 bg-black/30 rounded-lg border border-gray-700/50 p-4">
-                                        <div className="text-sm text-gray-400">Active Incidents</div>
-                                        <div className="text-2xl font-bold text-white">1,402 <span className="text-sm font-normal text-gray-500">tracked</span></div>
-                                    </div>
-                                </div>
-                                <div className="flex-1 bg-black/30 rounded-lg border border-gray-700/50 relative overflow-hidden flex items-center justify-center p-0 md:p-0">
-                                    <WorldMap
-                                        dots={[
-                                            // USA internal
-                                            {
-                                                start: { lat: 64.2008, lng: -149.4937, label: "Alaska" },
-                                                end: { lat: 34.0522, lng: -118.2437, label: "Los Angeles" }
-                                            },
-
-                                            // USA → India
-                                            {
-                                                start: { lat: 38.9072, lng: -77.0369, label: "USA" },
-                                                end: { lat: 28.6139, lng: 77.2090, label: "India" }
-                                            },
-
-                                            // USA → Brazil
-                                            {
-                                                start: { lat: 64.2008, lng: -149.4937, label: "Alaska" },
-                                                end: { lat: -15.7975, lng: -47.8919, label: "Brazil" }
-                                            },
-
-                                            // Brazil → Portugal
-                                            {
-                                                start: { lat: -15.7975, lng: -47.8919, label: "Brazil" },
-                                                end: { lat: 38.7223, lng: -9.1393, label: "Portugal" }
-                                            },
-
-                                            // UAE → India
-                                            {
-                                                start: { lat: 25.276987, lng: 55.296249, label: "UAE" },
-                                                end: { lat: 28.6139, lng: 77.2090, label: "India" }
-                                            },
-
-                                            // UK → India
-                                            {
-                                                start: { lat: 51.5074, lng: -0.1278, label: "UK" },
-                                                end: { lat: 28.6139, lng: 77.2090, label: "India" }
-                                            },
-
-                                            // India → Russia
-                                            {
-                                                start: { lat: 28.6139, lng: 77.2090, label: "India" },
-                                                end: { lat: 43.1332, lng: 131.9113, label: "Russia" }
-                                            }
-                                        ]}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Glow effect behind the dashboard */}
-                        <div className="absolute -inset-4 bg-blue-500/20 blur-[60px] -z-10 rounded-full"></div>
                     </div>
                 </section>
 
