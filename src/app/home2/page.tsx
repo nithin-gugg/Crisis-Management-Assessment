@@ -47,8 +47,8 @@ export default function Home2() {
                             <span className="text-[#E6B959] drop-shadow-md">Strategically Managed.</span>
                         </h1>
                         <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-lg mb-2">
-                            The ultimate command center for modern enterprises. Anticipate, prepare, <br className="hidden md:block" />
-                            and manage disruptions before they become crises.
+                            Built on globally recognized standards — ISO 22301 for Business Continuity and ISO 27001
+                            for Information Security — ensuring trusted resilience and secure operations.
                         </p>
 
                         {/* ISO Certificates */}
