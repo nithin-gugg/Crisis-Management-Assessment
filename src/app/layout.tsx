@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AssessmentProvider } from '@/context/AssessmentContext';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -147,22 +147,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         
         {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-JRETHFVWB8"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-JRETHFVWB8');
-            `,
-          }}
-        />
+        <GoogleAnalytics gaId="G-JRETHFVWB8" />
 
         <AssessmentProvider>
           {children}
